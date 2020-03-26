@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace FlickrClient.Components.Controls
 {
-    public class View : Control
+    public class View : ContentControl
     {
     }
 }

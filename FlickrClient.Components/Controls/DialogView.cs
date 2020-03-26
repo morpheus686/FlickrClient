@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlickrClient.Upload
+namespace FlickrClient.Components.Controls
 {
-    public class Class1
+    public abstract class DialogView : View
     {
     }
 }

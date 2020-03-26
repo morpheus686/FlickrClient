@@ -22,7 +22,7 @@ namespace FlickrClient.View
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
     }
 }

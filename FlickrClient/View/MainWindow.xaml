@@ -10,6 +10,8 @@
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr" Height="450" Width="800">
     <Grid>
-        
+        <ContentControl x:Name="MainRegion"/>
+        <ContentControl x:Name="DialogRegion"/>
+        <ContentControl x:Name="MessageRegion"/>
     </Grid>
 </Window>
