@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlickrClient
+namespace FlickrClient.View
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml

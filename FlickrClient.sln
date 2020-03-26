@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrClient", "FlickrClient\FlickrClient.csproj", "{BA95593F-9689-481A-89CF-10F4AAE158FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrClient.DomainModel", "FlickrClient.DomainModel\FlickrClient.DomainModel.csproj", "{A32C238D-9755-4051-9B49-2FEAA05F77D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrClient.Components", "FlickrClient.Components\FlickrClient.Components.csproj", "{FC2461CA-D417-4EE4-A293-881DEA52198F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrClient.Profile", "FlickrClient.Profile\FlickrClient.Profile.csproj", "{7CD93C06-B101-41D3-9E86-0C4ACED29ABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrClient.Upload", "FlickrClient.Upload\FlickrClient.Upload.csproj", "{C15FF90E-E741-44BA-9081-F1B6AD8E7BBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrClient.Styles", "FlickrClient.Styles\FlickrClient.Styles.csproj", "{42B1754F-EBB7-46AF-8216-6613857D7A08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{BA95593F-9689-481A-89CF-10F4AAE158FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA95593F-9689-481A-89CF-10F4AAE158FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA95593F-9689-481A-89CF-10F4AAE158FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32C238D-9755-4051-9B49-2FEAA05F77D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32C238D-9755-4051-9B49-2FEAA05F77D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32C238D-9755-4051-9B49-2FEAA05F77D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32C238D-9755-4051-9B49-2FEAA05F77D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC2461CA-D417-4EE4-A293-881DEA52198F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2461CA-D417-4EE4-A293-881DEA52198F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC2461CA-D417-4EE4-A293-881DEA52198F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2461CA-D417-4EE4-A293-881DEA52198F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD93C06-B101-41D3-9E86-0C4ACED29ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD93C06-B101-41D3-9E86-0C4ACED29ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD93C06-B101-41D3-9E86-0C4ACED29ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD93C06-B101-41D3-9E86-0C4ACED29ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C15FF90E-E741-44BA-9081-F1B6AD8E7BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C15FF90E-E741-44BA-9081-F1B6AD8E7BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C15FF90E-E741-44BA-9081-F1B6AD8E7BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C15FF90E-E741-44BA-9081-F1B6AD8E7BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B1754F-EBB7-46AF-8216-6613857D7A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B1754F-EBB7-46AF-8216-6613857D7A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B1754F-EBB7-46AF-8216-6613857D7A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B1754F-EBB7-46AF-8216-6613857D7A08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
