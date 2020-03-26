@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlickrClient.Components.Services
-{
-    [Export(typeof(IDialogService))]
+namespace FlickrClient.Services
+{    
     public class DialogService : IDialogService
     {
         public async Task<DialogResult> ShowDialog<VM>(VM viewModel, string DialogName)
