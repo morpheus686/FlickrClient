@@ -1,6 +1,5 @@
-﻿
-
-using Autofac;
+﻿using Autofac;
+using FlickrClient.Upload.ViewModel;
 
 namespace FlickrClient.Upload
 {
@@ -8,7 +7,8 @@ namespace FlickrClient.Upload
     {
         protected override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
+            builder.RegisterType<UploadViewModel>()
+                .SingleInstance();
         }
     }
 }

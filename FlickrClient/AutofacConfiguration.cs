@@ -17,6 +17,10 @@ namespace FlickrClient
                 .As<IDialogService>()
                 .SingleInstance();
 
+            builder.RegisterType<SettingsService>()
+                .As<ISettingsService>()
+                .SingleInstance();
+
             builder.RegisterType<MainWindowViewModel>()
                 .SingleInstance();
         }

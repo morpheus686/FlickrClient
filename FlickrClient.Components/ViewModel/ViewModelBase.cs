@@ -16,5 +16,22 @@ namespace FlickrClient.Components.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public Task Initialize()
+        {
+            InitializeInternal();
+            return InitializeInternalAsync();
+        }
+        
+
+        protected virtual void InitializeInternal()
+        {
+
+        }
+
+        protected virtual Task InitializeInternalAsync()
+        {
+            return Task.CompletedTask;
+        }
     }
 }

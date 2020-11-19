@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +35,9 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=5.1.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.5.1.2\lib\net461\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="FlickrNet, Version=3.26.0.0, Culture=neutral, PublicKeyToken=2491df59efa5d132, processorArchitecture=MSIL">
+      <HintPath>..\packages\FlickrNet.3.26.0\lib\net20\FlickrNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -56,9 +61,32 @@
   <ItemGroup>
     <Compile Include="AutofacConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UploadService.cs" />
+    <Compile Include="ViewModel\UploadViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlickrClient.Components\FlickrClient.Components.csproj">
+      <Project>{FC2461CA-D417-4EE4-A293-881DEA52198F}</Project>
+      <Name>FlickrClient.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlickrClient.DomainModel\FlickrClient.DomainModel.csproj">
+      <Project>{A32C238D-9755-4051-9B49-2FEAA05F77D6}</Project>
+      <Name>FlickrClient.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlickrClient.Profile\FlickrClient.Profile.csproj">
+      <Project>{DF0B3926-ADF4-4B02-BD64-81F42011058E}</Project>
+      <Name>FlickrClient.Profile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlickrClient.Styles\FlickrClient.Styles.csproj">
+      <Project>{42b1754f-ebb7-46af-8216-6613857d7a08}</Project>
+      <Name>FlickrClient.Styles</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

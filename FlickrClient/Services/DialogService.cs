@@ -1,4 +1,5 @@
-﻿using FlickrClient.DomainModel.Enumerations;
+﻿using FlickrClient.Components.Controls;
+using FlickrClient.DomainModel.Enumerations;
 using FlickrClient.DomainModel.Services;
 using FlickrClient.View;
 using System;
@@ -21,25 +22,31 @@ namespace FlickrClient.Services
 
         private ContentControl LoadDialogRegion()
         {
-            if (!(Application.Current.MainWindow is MainWindow mainWindow))
+            if (Application.Current.MainWindow is MainWindow mainWindow)
             {
-                throw new Exception("DialogRegion not found!");
+                return mainWindow.DialogRegion;
             }
 
-            return mainWindow.DialogRegion;
+            throw new Exception("DialogRegion not found!");
         }
 
         public async Task<DialogResult> ShowDialog<VM>(VM viewModel, string dialogName)
         {
-            var dialog =  _viewService.GetView(dialogName);
-            _dialogRegion.Value.Content = dialog ?? throw new Exception("Dialog not found!");
-            _dialogRegion.Value.DataContext = viewModel;
+            var dialog = _viewService.GetView(dialogName);
 
-            await Task.Delay(5000);
+            if (!(dialog is DialogView dialogView))
+            {
+                throw new Exception("Requested view is not a dialog!");
+            }
+
+            dialogView.DataContext = viewModel;
+            _dialogRegion.Value.Content = dialogView;
+
+            var result = await dialogView.Result.Task;
 
             _dialogRegion.Value.Content = null;
 
-            return DialogResult.Ok;
+            return result;
         }
     }
 }
