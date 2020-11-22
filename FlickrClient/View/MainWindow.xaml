@@ -5,20 +5,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         xmlns:local="clr-namespace:FlickrClient"
         xmlns:vm="clr-namespace:FlickrClient.ViewModel"
+        xmlns:upload="clr-namespace:FlickrClient.Upload.View;assembly=FlickrClient.Upload"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr" Height="450" Width="800">
     <Grid>
         <ContentControl x:Name="MainRegion">
-            <TabControl TabStripPlacement="Left" >
-                <TabItem Header="Profile" >
-                    <TextBox Height="30" Text="Hier steht ein Text" />
+            <dragablz:TabablzControl
+                TabStripPlacement="Left">
+                <TabItem Header="Upload">
+                    <upload:UploadView/>
                 </TabItem>
-            </TabControl>
+            </dragablz:TabablzControl>
         </ContentControl>
-        <ContentControl x:Name="DialogRegion"/>
-        <ContentControl x:Name="MessageRegion"/>
+        <ContentControl x:Name="DialogRegion" />        
     </Grid>
 </Window>
