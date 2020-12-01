@@ -2,6 +2,8 @@
 using FlickrClient.DomainModel.Services;
 using FlickrClient.Services;
 using FlickrClient.ViewModel;
+using FlickrClient.ViewModel.PhotoStream;
+using FlickrClient.ViewModel.Search;
 
 namespace FlickrClient
 {
@@ -30,6 +32,14 @@ namespace FlickrClient
                 .SingleInstance();
 
             builder.RegisterType<MainWindowViewModel>()
+                .SingleInstance();
+
+            builder.RegisterType<SearchTabViewModel>()
+                .As<TabViewModel>()
+                .SingleInstance();
+
+            builder.RegisterType<PhotoStreamTabViewModel>()
+                .As<TabViewModel>()
                 .SingleInstance();
         }
     }
