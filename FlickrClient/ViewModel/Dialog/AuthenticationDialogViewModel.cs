@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
-namespace FlickrClient.Components.Controls
+namespace FlickrClient.ViewModel.Dialog
 {
-    public abstract class View : ContentControl
+    public class AuthenticationDialogViewModel : LoadableViewModel
     {
-
     }
 }

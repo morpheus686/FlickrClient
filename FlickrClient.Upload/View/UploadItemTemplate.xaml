@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlickrClient.Upload.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converter="clr-namespace:FlickrClient.Components.Converter;assembly=FlickrClient.Components"
              mc:Ignorable="d" 
-             Width="800">
+             Width="1000">
+    <UserControl.Resources>
+        <converter:FileInfoToStringConverter x:Key="FileInfoToStringConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -14,6 +18,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -23,7 +28,7 @@
                Grid.RowSpan="4"
                Width="300"
                Height="200"
-               Source="D:\Bilder\60D\2020_11_18\darktable_exported\IMG_9149_01.jpg"/>
+               Source="{Binding Location, Mode=OneWay, Converter={StaticResource FileInfoToStringConverter}}"/>
         <TextBox  materialDesign:HintAssist.Hint="Überschrift" Grid.Row="0" Grid.Column="1" 
                   HorizontalAlignment="Stretch"
                   Text="{Binding Header}"/>
@@ -34,5 +39,8 @@
         <TextBox  materialDesign:HintAssist.Hint="Tags" Grid.Row="2" Grid.Column="1" 
                   HorizontalAlignment="Stretch"
                   Text="{Binding Tags}"/>
+        <CheckBox IsChecked="{Binding IsPublic}"
+                  Grid.Row="3" Grid.Column="1"
+                  Content="Öffentlich"/>
     </Grid>
 </UserControl>

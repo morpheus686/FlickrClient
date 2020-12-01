@@ -13,15 +13,6 @@ namespace FlickrClient.View
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindowLoaded;
-        }
-
-        private void MainWindowLoaded(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is ViewModelBase vms)
-            {
-                vms.Initialize();
-            }
         }
     }
 }

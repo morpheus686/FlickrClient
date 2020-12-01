@@ -46,8 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations\DialogResult.cs" />
+    <Compile Include="EventArguments\AuthorizationChangedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAuthorizationService.cs" />
     <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\IFlickrService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\IViewService.cs" />
   </ItemGroup>

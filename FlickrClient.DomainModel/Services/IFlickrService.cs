@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlickrClient.Profile.Services
+namespace FlickrClient.DomainModel.Services
 {
-    public interface IProfileManager
+    public interface IFlickrService
     {
         Flickr GetInstance();
-        Flickr GetAuthInstance();
+        Flickr GetAuthorizationInstance();
+        bool HasAccessToken();
     }
 }

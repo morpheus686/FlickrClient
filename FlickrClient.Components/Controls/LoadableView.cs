@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlickrClient.Components.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,21 @@ namespace FlickrClient.Components.Controls
         {
             get { return (bool)GetValue(IsLoadingProperty); }
             set { SetValue(IsLoadingProperty, value); }
+        }
+
+        public LoadableView()
+        {
+            Loaded += View_Loaded;
+        }
+
+        private async void View_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (DataContext is LoadableViewModel lvm)
+            {
+                IsLoading = true;
+                await lvm.Initialize();
+                IsLoading = false;
+            }
         }
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FlickrClient.DomainModel.Services;
 
 namespace FlickrClient.Upload.Services
 {
-    class UploadService
+    internal class UploadService : IUploadService
     {
+        private readonly IFlickrService _flickrService;
+
+        public UploadService(IFlickrService flickrService)
+        {
+            _flickrService = flickrService;
+        }
     }
 }

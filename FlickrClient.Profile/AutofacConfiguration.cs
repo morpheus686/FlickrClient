@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using FlickrClient.Profile.Services;
 
 namespace FlickrClient.Profile
 {
@@ -7,9 +6,6 @@ namespace FlickrClient.Profile
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ProfileManager>()
-                .As<IProfileManager>()
-                .SingleInstance();
         }
     }
 }

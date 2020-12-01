@@ -11,16 +11,59 @@
         xmlns:upload="clr-namespace:FlickrClient.Upload.View;assembly=FlickrClient.Upload"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
-        Title="Flickr" Height="450" Width="800">
-    <Grid>
-        <ContentControl x:Name="MainRegion">
-            <dragablz:TabablzControl
-                TabStripPlacement="Left">
-                <TabItem Header="Upload">
-                    <upload:UploadView/>
-                </TabItem>
-            </dragablz:TabablzControl>
-        </ContentControl>
-        <ContentControl x:Name="DialogRegion" />        
-    </Grid>
+        Title="Flickr" 
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">     
+    <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
+                               Identifier="DialogHost"
+                               >
+        <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
+                                   Identifier="MessageHost"
+                                   CloseOnClickAway="True">
+            <Grid>
+                <Grid x:Name="MenuGrid" 
+                      Width="300"
+                      HorizontalAlignment="Left">
+                    <StackPanel>
+                        <Image Height="200"/>
+                        <ListView FontSize="18">
+                            <ListViewItem Height="45" Padding="0">
+                                <StackPanel Orientation="Horizontal" Margin="10, 0">
+                                    <materialDesign:PackIcon Kind="PhotoLibrary" 
+                                                             VerticalAlignment="Center"
+                                                             Width="20"
+                                                             Height="20"
+                                                             Foreground="Gray"/>
+                                    <TextBlock Text="Fotostream" 
+                                               Margin="10"
+                                               Foreground="Gray"/>                                   
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="45" Padding="0">
+                                <StackPanel Orientation="Horizontal" Margin="10, 0">
+                                    <materialDesign:PackIcon Kind="PhotoAlbum" 
+                                                             VerticalAlignment="Center"
+                                                             Width="20"
+                                                             Height="20"
+                                                             Foreground="Gray"/>
+                                    <TextBlock Text="Alben" 
+                                               Margin="10"
+                                               Foreground="Gray"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                    <Button x:Name="CloseButton"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}">
+                        <materialDesign:PackIcon Kind="Close"/>
+                    </Button>
+                </Grid>
+            </Grid> 
+        </materialDesign:DialogHost>
+    </materialDesign:DialogHost>
 </Window>

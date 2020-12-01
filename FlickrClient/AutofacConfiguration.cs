@@ -9,6 +9,14 @@ namespace FlickrClient
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<AuthorizationService>()
+                .As<IAuthorizationService>()
+                .SingleInstance();
+
+            builder.RegisterType<FlickrService>()
+                .As<IFlickrService>()
+                .SingleInstance();
+
             builder.RegisterType<ViewService>()
                 .As<IViewService>()
                 .SingleInstance();

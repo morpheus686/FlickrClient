@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlickrClient.Styles
+namespace FlickrClient.Upload.Services
 {
-    public class Class1
+    public interface IUploadService
     {
     }
 }

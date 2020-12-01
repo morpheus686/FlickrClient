@@ -12,10 +12,5 @@ namespace FlickrClient.ViewModel
         {
             _dialogService = dialogService;
         }
-
-        protected override Task InitializeInternalAsync()
-        {
-            return _dialogService.ShowDialog(this, "EditProfileDialogView");
-        }
     }
 }

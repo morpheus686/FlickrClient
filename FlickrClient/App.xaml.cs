@@ -27,8 +27,10 @@ namespace FlickrClient
             var executingAssembly = Assembly.GetExecutingAssembly();
             string executionPath = Path.GetDirectoryName(executingAssembly.Location);
 
-            List<Assembly> allAssemblies = new List<Assembly>();
-            allAssemblies.Add(executingAssembly);
+            List<Assembly> allAssemblies = new List<Assembly>
+            {
+                executingAssembly
+            };
 
             foreach (string dll in Directory.GetFiles(executionPath, "*.dll"))
             {

@@ -12,7 +12,8 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Grid>
-        <ListBox ItemsSource="{Binding UploadItems, Mode=OneWay}">
+        <ListBox ItemsSource="{Binding UploadItems, Mode=OneWay}"
+                 AllowDrop="True">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:UploadItemTemplate />
