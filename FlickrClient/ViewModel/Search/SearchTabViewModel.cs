@@ -31,15 +31,28 @@ namespace FlickrClient.ViewModel.Search
             _flickrService = flickrService;
         }
 
-        protected override void InitializeInternal()
-        {
+        protected override async Task InitializeInternalAsync()
+        {       
             PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions();
             photoSearchOptions.Extras = PhotoSearchExtras.AllUrls | PhotoSearchExtras.Description | PhotoSearchExtras.OwnerName;
             photoSearchOptions.SortOrder = PhotoSearchSortOrder.Relevance;
             photoSearchOptions.Tags = "ET440";
 
             var flickr = _flickrService.GetInstance();
-            Photos = flickr.PhotosSearch(photoSearchOptions);
+
+            var taskCompletionSource = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
+
+            flickr.PhotosSearchAsync(photoSearchOptions, result =>
+            {
+                taskCompletionSource.SetResult(result);
+            });
+
+            var searchResult = await taskCompletionSource.Task;
+
+            if (!searchResult.HasError)
+            {
+                Photos = searchResult.Result;
+            }
         }
     }
 }
