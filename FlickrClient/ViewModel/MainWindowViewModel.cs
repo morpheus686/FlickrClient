@@ -11,18 +11,6 @@ namespace FlickrClient.ViewModel
         private readonly IDialogService _dialogService;
         private readonly ObservableCollection<TabViewModel> _tabCollection;
 
-        private object _selectedItem;
-
-        public object SelectedItem
-        {
-            get { return _selectedItem; }
-            set {
-                _selectedItem = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
         public ObservableCollection<TabViewModel> TabCollection
         {
             get { return _tabCollection; }

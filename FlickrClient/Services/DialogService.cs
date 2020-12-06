@@ -22,5 +22,10 @@ namespace FlickrClient.Services
         {
             throw new Exception();
         }
+
+        public Task ShowIndeterminateDialog(string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

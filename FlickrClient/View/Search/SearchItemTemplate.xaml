@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="FlickrClient.View.Search.SearchItemTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlickrClient.View.Search"
+             mc:Ignorable="d" 
+             Width="600"
+             Height="150">
+    <Border BorderBrush="DarkGray"
+            BorderThickness="1"
+            Margin="2"
+            Background="{StaticResource MaterialDesignCardBackground}">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="1"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Grid.Row="0"               
+                   Source="{Binding LargeSquareThumbnailUrl, Mode=OneWay}" 
+                   Width="150"/>
+            <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Grid.Column="1">
+                <TextBlock Text="{Binding Title}" 
+                               FontSize="20"
+                               Margin="2"
+                               TextWrapping="Wrap"/>
+                <TextBlock Margin="2"
+                               Text="{Binding DateTaken}" />
+                <TextBlock Margin="2"
+                               Text="{Binding OwnerName}" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

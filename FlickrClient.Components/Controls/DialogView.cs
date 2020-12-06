@@ -10,11 +10,6 @@ namespace FlickrClient.Components.Controls
 {
     public abstract class DialogView : LoadableView
     {
-        public DialogView()
-        {
-            Result = new TaskCompletionSource<DialogResult>();
-        }
 
-        public TaskCompletionSource<DialogResult> Result { get; private set; }
     }
 }

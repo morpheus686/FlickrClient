@@ -1,4 +1,5 @@
 ﻿using FlickrClient.Components.ViewModel;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,15 @@ namespace FlickrClient.Components.Controls
         {
             if (DataContext is LoadableViewModel lvm)
             {
+                Task loadTask = lvm.Initialize();
+
+                if (loadTask.IsCompleted)
+                {
+                    return;
+                } 
+
                 IsLoading = true;
-                await lvm.Initialize();
+                await loadTask;
                 IsLoading = false;
             }
         }

@@ -1,10 +1,6 @@
-﻿using FlickrClient.Components.ViewModel;
+﻿using FlickrClient.Components.Commands;
 using FlickrClient.DomainModel.Services;
 using FlickrNet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FlickrClient.ViewModel.Search
@@ -24,19 +20,25 @@ namespace FlickrClient.ViewModel.Search
             }
         }
 
+        public string SearchText { get; set; }
+
+        public AsyncCommand SearchCommand { get; }
+
         public SearchTabViewModel(IFlickrService flickrService)
         {
             Header = "Suchen";
             PackIconKind = MaterialDesignThemes.Wpf.PackIconKind.Search;
             _flickrService = flickrService;
+
+            SearchCommand = new AsyncCommand(ExecuteSearchCommand);
         }
 
-        protected override async Task InitializeInternalAsync()
-        {       
+        private async Task ExecuteSearchCommand()
+        {
             PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions();
             photoSearchOptions.Extras = PhotoSearchExtras.AllUrls | PhotoSearchExtras.Description | PhotoSearchExtras.OwnerName;
             photoSearchOptions.SortOrder = PhotoSearchSortOrder.Relevance;
-            photoSearchOptions.Tags = "ET440";
+            photoSearchOptions.Tags = SearchText;
 
             var flickr = _flickrService.GetInstance();
 

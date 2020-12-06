@@ -1,0 +1,23 @@
+﻿<components:DialogView x:Class="FlickrClient.View.Dialog.IndeterminateProgressDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:components="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
+             xmlns:local="clr-namespace:FlickrClient.View.Dialog"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+                       Width="400"
+                       Height="100">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ProgressBar IsIndeterminate="True" 
+                     Margin="10"
+                     Grid.Row="1"
+                     Height="10"
+                     VerticalAlignment="Center"/>
+    </Grid>
+</components:DialogView>

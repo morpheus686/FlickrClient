@@ -14,10 +14,10 @@
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr" 
-        WindowState="Maximized"
-        ResizeMode="NoResize"
         Background="{StaticResource MaterialDesignPaper}"
-        FontFamily="{StaticResource MaterialDesignFont}">
+        FontFamily="{StaticResource MaterialDesignFont}"
+        Width="1000"
+        Height="600">
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
@@ -68,20 +68,29 @@
                                    Identifier="MessageHost"
                                    CloseOnClickAway="True">
             <Grid>
-                <ContentControl Content="{Binding SelectedItem, Mode=OneWay}" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <Button x:Name="OpenButton"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
-                            Foreground="Black">
+                            Foreground="Black"
+                        Grid.Row="0">
                     <materialDesign:PackIcon Kind="Menu"/>
                 </Button>
+                <ContentControl Content="{Binding SelectedItem, ElementName=TabListView, Mode=OneWay}" 
+                                Grid.Row="1"/>
+
                 <Grid x:Name="MenuGrid" 
                         Width="300"
                         Margin="-305,0,0,0"
                         HorizontalAlignment="Left"
-                        RenderTransformOrigin="0.5,0.5">
+                        RenderTransformOrigin="0.5,0.5"
+                        Background="{StaticResource MaterialDesignBody}"
+                      Grid.RowSpan="2">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform />
@@ -95,7 +104,6 @@
                                 Source="/FlickrClient;component/48755906586_5d1091bdc5_w.jpg"/>
                         <ListView FontSize="18" ItemsSource="{Binding TabCollection, Mode=OneWay}"
                                   ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
-                                  SelectedItem="{Binding SelectedItem}"
                                   x:Name="TabListView" />
 
                     </StackPanel>
