@@ -38,9 +38,9 @@ namespace FlickrClient
                 .As<TabViewModel>()
                 .SingleInstance();
 
-            builder.RegisterType<PhotoStreamTabViewModel>()
-                .As<TabViewModel>()
-                .SingleInstance();
+            //builder.RegisterType<PhotoStreamTabViewModel>()
+            //    .As<TabViewModel>()
+            //    .SingleInstance();
         }
     }
 }

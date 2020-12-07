@@ -2,7 +2,7 @@
 using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace FlickrClient.ViewModel
 {
@@ -10,6 +10,8 @@ namespace FlickrClient.ViewModel
     {
         private readonly IDialogService _dialogService;
         private readonly ObservableCollection<TabViewModel> _tabCollection;
+
+        public TabViewModel SelectedTab { get; set; }
 
         public ObservableCollection<TabViewModel> TabCollection
         {
@@ -31,6 +33,9 @@ namespace FlickrClient.ViewModel
             {
                 _tabCollection.Add(tab);
             }
+
+            SelectedTab = tabs.FirstOrDefault();
+            RaisePropertyChanged(nameof(SelectedTab));
         }
     }
 }

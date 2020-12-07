@@ -46,6 +46,15 @@
                          VerticalAlignment="Center"
                          Text="{Binding SearchText, Mode=TwoWay}"/>
 
+                <TextBlock Text="Sortierung" 
+                           Grid.Row="1" Grid.Column="0"
+                           VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding SortOrder, Mode=OneWay}"
+                          SelectedItem="{Binding SelectedSortOrder, Mode=TwoWay}"
+                          Grid.Row="1" Grid.Column="1" 
+                          Margin="10,2,2,2"
+                          VerticalAlignment="Center"/>
+
                 <Button Grid.Column="1"
                         Grid.Row="2"
                         Content="Suchen" 
@@ -57,8 +66,8 @@
         </GroupBox>
 
         <ListBox ItemsSource="{Binding Photos}" 
-                    ItemTemplate="{StaticResource ResultPreview}"
-                    Grid.Row="2"
+                 ItemTemplate="{StaticResource ResultPreview}"
+                 Grid.Row="2"
                  BorderThickness="1"
                  BorderBrush="DarkGray"
                  Margin="10">

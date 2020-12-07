@@ -103,6 +103,7 @@
                         <Image Height="200"
                                 Source="/FlickrClient;component/48755906586_5d1091bdc5_w.jpg"/>
                         <ListView FontSize="18" ItemsSource="{Binding TabCollection, Mode=OneWay}"
+                                  SelectedItem="{Binding SelectedTab}"
                                   ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
                                   x:Name="TabListView" />
 
