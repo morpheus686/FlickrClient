@@ -4,15 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlickrClient.View.Search"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Width="600">
-    <Border BorderBrush="DarkGray"
-            BorderThickness="1"
-            Margin="2"
-            Background="{StaticResource MaterialDesignCardBackground}">
-        <Border.Effect>
-            <DropShadowEffect ShadowDepth="1"/>
-        </Border.Effect>
+    <materialDesign:Card Margin="2">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -22,20 +17,20 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Grid.Row="0"               
-                   Source="{Binding LargeSquareThumbnailUrl, Mode=OneWay}"
-                   Width="150"
-                   Height="150" />
+                       Source="{Binding LargeSquareThumbnailUrl, Mode=OneWay}"
+                       Width="150"
+                       Height="150" />
             <StackPanel Orientation="Vertical"
-                            VerticalAlignment="Center"
-                            Grid.Column="1"
-                        Margin="10">
+                                VerticalAlignment="Center"
+                                Grid.Column="1"
+                            Margin="10">
                 <TextBlock Text="{Binding Title, Mode=OneWay}" 
-                               FontSize="20"
-                               Margin="2"
-                               TextWrapping="Wrap"/>
+                                   FontSize="20"
+                                   Margin="2"
+                                   TextWrapping="Wrap"/>
                 <TextBlock Margin="2"
-                               Text="{Binding OwnerName, Mode=OneWay}" />
+                                   Text="{Binding OwnerName, Mode=OneWay}" />
             </StackPanel>
         </Grid>
-    </Border>
+    </materialDesign:Card>
 </UserControl>

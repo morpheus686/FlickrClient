@@ -63,7 +63,7 @@
     </Window.Triggers>
     <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
                                Identifier="DialogHost"
-                               >
+                               x:Name="DialogHost">
         <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
                                    Identifier="MessageHost"
                                    CloseOnClickAway="True">

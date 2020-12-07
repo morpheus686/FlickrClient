@@ -10,6 +10,6 @@ namespace FlickrClient.DomainModel.Services
     public interface IDialogService
     {
         Task<DialogResult> ShowDialog<VM>(VM viewModel, string DialogName);
-        Task ShowIndeterminateDialog(string message);
+        Task ShowIndeterminateDialog(Func<Task> progressTask);
     }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:components="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:FlickrClient.View.Search"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -23,7 +24,8 @@
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Sucheinstellungen"
-                  Margin="10">
+                  Margin="10"
+                  Style="{StaticResource MaterialDesignCardGroupBox}">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
@@ -49,7 +51,8 @@
                 <TextBlock Text="Sortierung" 
                            Grid.Row="1" Grid.Column="0"
                            VerticalAlignment="Center"/>
-                <ComboBox ItemsSource="{Binding SortOrder, Mode=OneWay}"
+                <ListBox ItemsSource="{Binding SortOrder, Mode=OneWay}"
+                         Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}"
                           SelectedItem="{Binding SelectedSortOrder, Mode=TwoWay}"
                           Grid.Row="1" Grid.Column="1" 
                           Margin="10,2,2,2"

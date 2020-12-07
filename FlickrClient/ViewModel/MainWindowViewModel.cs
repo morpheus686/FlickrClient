@@ -8,7 +8,6 @@ namespace FlickrClient.ViewModel
 {
     public class MainWindowViewModel : LoadableViewModel
     {
-        private readonly IDialogService _dialogService;
         private readonly ObservableCollection<TabViewModel> _tabCollection;
 
         public TabViewModel SelectedTab { get; set; }
@@ -18,10 +17,8 @@ namespace FlickrClient.ViewModel
             get { return _tabCollection; }
         }
 
-        public MainWindowViewModel(IDialogService dialogService)
+        public MainWindowViewModel()
         {
-            _dialogService = dialogService;
-
             _tabCollection = new ObservableCollection<TabViewModel>();
         }
 

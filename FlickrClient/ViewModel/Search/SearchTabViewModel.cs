@@ -12,6 +12,7 @@ namespace FlickrClient.ViewModel.Search
     {
         private PhotoCollection _photos;
         private readonly IFlickrService _flickrService;
+        private readonly IDialogService _dialogService;
 
         public PhotoCollection Photos
         {
@@ -30,13 +31,14 @@ namespace FlickrClient.ViewModel.Search
 
         public AsyncCommand SearchCommand { get; }
 
-        public SearchTabViewModel(IFlickrService flickrService)
+        public SearchTabViewModel(IFlickrService flickrService,
+            IDialogService dialogService)
         {
             Header = "Suchen";
             PackIconKind = MaterialDesignThemes.Wpf.PackIconKind.Search;
 
             _flickrService = flickrService;
-
+            _dialogService = dialogService;
             SortOrder =  Enum.GetValues(typeof(PhotoSearchSortOrder)).Cast<PhotoSearchSortOrder>();
             SelectedSortOrder = PhotoSearchSortOrder.Relevance;
 
@@ -45,6 +47,11 @@ namespace FlickrClient.ViewModel.Search
 
         private async Task ExecuteSearchCommand()
         {
+            await _dialogService.ShowIndeterminateDialog(SearchFotosAsync);
+        }
+
+        private async Task SearchFotosAsync()
+        {        
             Photos = null;
 
             PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions();
