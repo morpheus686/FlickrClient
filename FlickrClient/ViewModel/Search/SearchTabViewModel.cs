@@ -10,11 +10,11 @@ namespace FlickrClient.ViewModel.Search
 {
     public class SearchTabViewModel : TabViewModel
     {
-        private PhotoCollection _photos;
+        private List<SearchItemViewModel> _photos;
         private readonly IFlickrService _flickrService;
         private readonly IDialogService _dialogService;
 
-        public PhotoCollection Photos
+        public List<SearchItemViewModel> Photos
         {
             get { return _photos; }
             private set 
@@ -39,6 +39,7 @@ namespace FlickrClient.ViewModel.Search
 
             _flickrService = flickrService;
             _dialogService = dialogService;
+
             SortOrder =  Enum.GetValues(typeof(PhotoSearchSortOrder)).Cast<PhotoSearchSortOrder>();
             SelectedSortOrder = PhotoSearchSortOrder.Relevance;
 
@@ -54,11 +55,12 @@ namespace FlickrClient.ViewModel.Search
         {        
             Photos = null;
 
-            PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions();
-            photoSearchOptions.Extras = PhotoSearchExtras.AllUrls | PhotoSearchExtras.Description | PhotoSearchExtras.OwnerName;
-            photoSearchOptions.SortOrder = SelectedSortOrder;
-            
-            photoSearchOptions.Tags = SearchText;
+            PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions
+            {
+                Extras = PhotoSearchExtras.AllUrls | PhotoSearchExtras.Description | PhotoSearchExtras.OwnerName,
+                SortOrder = SelectedSortOrder,
+                Tags = SearchText
+            };
 
             var flickr = _flickrService.GetInstance();
             var taskCompletionSource = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
@@ -72,7 +74,9 @@ namespace FlickrClient.ViewModel.Search
 
             if (!searchResult.HasError)
             {
-                Photos = searchResult.Result;
+                Photos = searchResult.Result
+                    .Select(item => new SearchItemViewModel(_dialogService, item))
+                    .ToList();
             }
         }
     }

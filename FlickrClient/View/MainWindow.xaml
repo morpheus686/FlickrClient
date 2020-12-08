@@ -5,12 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
-        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
-        xmlns:local="clr-namespace:FlickrClient"
         xmlns:vm="clr-namespace:FlickrClient.ViewModel"
         xmlns:svm="clr-namespace:FlickrClient.ViewModel.Search"
         xmlns:sv="clr-namespace:FlickrClient.View.Search"
-        xmlns:upload="clr-namespace:FlickrClient.Upload.View;assembly=FlickrClient.Upload"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr" 
@@ -19,21 +16,6 @@
         Width="1000"
         Height="600">
     <Window.Resources>
-        <Storyboard x:Key="OpenMenu">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
-                                           Storyboard.TargetName="MenuGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="300" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CloseMenu">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
-                                           Storyboard.TargetName="MenuGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
         <DataTemplate x:Key="TabItemTemplate">
             <StackPanel Orientation="Horizontal"
                         Margin="10, 0"
@@ -50,74 +32,74 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type svm:SearchTabViewModel}">
-            <sv:SearchTabView/>               
+            <sv:SearchTabView/>
         </DataTemplate>
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger SourceName="CloseButton" RoutedEvent="ButtonBase.Click">
-            <BeginStoryboard Storyboard="{StaticResource CloseMenu}" />
-        </EventTrigger>
-        <EventTrigger SourceName="OpenButton" RoutedEvent="ButtonBase.Click">
-            <BeginStoryboard Storyboard="{StaticResource OpenMenu}" />
-        </EventTrigger>
-    </Window.Triggers>
+    
     <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
                                Identifier="DialogHost"
                                x:Name="DialogHost">
-        <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
-                                   Identifier="MessageHost"
-                                   CloseOnClickAway="True">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Button x:Name="OpenButton"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Background="{x:Null}"
-                            BorderBrush="{x:Null}"
-                            Foreground="Black"
-                        Grid.Row="0">
-                    <materialDesign:PackIcon Kind="Menu"/>
-                </Button>
-                <ContentControl Content="{Binding SelectedItem, ElementName=TabListView, Mode=OneWay}" 
-                                Grid.Row="1"/>
+        <materialDesign:DrawerHost
+            IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel Width="300">
+                    <ToggleButton 
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                        DockPanel.Dock="Top"
+                        HorizontalAlignment="Right" 
+                        Margin="16"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
 
-                <Grid x:Name="MenuGrid" 
-                        Width="300"
-                        Margin="-305,0,0,0"
-                        HorizontalAlignment="Left"
-                        RenderTransformOrigin="0.5,0.5"
-                        Background="{StaticResource MaterialDesignBody}"
-                      Grid.RowSpan="2">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform />
-                            <SkewTransform />
-                            <RotateTransform />
-                            <TranslateTransform />
-                        </TransformGroup>
-                    </Grid.RenderTransform>
                     <StackPanel>
                         <Image Height="200"
-                                Source="/FlickrClient;component/48755906586_5d1091bdc5_w.jpg"/>
+                                    Source="/FlickrClient;component/48755906586_5d1091bdc5_w.jpg"/>
                         <ListView FontSize="18" ItemsSource="{Binding TabCollection, Mode=OneWay}"
-                                  SelectedItem="{Binding SelectedTab}"
-                                  ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
-                                  x:Name="TabListView" />
-
+                                        SelectedItem="{Binding SelectedTab}"
+                                        ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
+                                        x:Name="TabListView" />
                     </StackPanel>
-                    <Button x:Name="CloseButton"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="{x:Null}"
-                            BorderBrush="{x:Null}"
-                            Foreground="Black">
-                        <materialDesign:PackIcon Kind="Close"/>
-                    </Button>
-                </Grid>
-            </Grid>                
-        </materialDesign:DialogHost>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <DockPanel >
+                <materialDesign:ColorZone Padding="0"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                        Mode="PrimaryMid"
+                                        DockPanel.Dock="Top"
+                                          ClipToBounds="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton x:Name="MenuToggleButton"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                      IsChecked="False"
+                                      AutomationProperties.Name="HamburgerToggleButton"
+                                      HorizontalAlignment="Left"
+                                      Margin="16"/>
+                        <TextBlock Text="Flickr Client"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="22"/>
+                        <materialDesign:PopupBox Grid.Column="2"
+                                                 StaysOpen="False"
+                                                 PlacementMode="BottomAndAlignRightEdges">
+                            <Button Content="Einloggen"
+                                    Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}"/>
+
+                        </materialDesign:PopupBox>
+                    </Grid>
+                </materialDesign:ColorZone>
+
+                <Grid>
+                    <ContentControl Content="{Binding SelectedItem, ElementName=TabListView, Mode=OneWay}" 
+                                    Grid.Row="1"/>                    
+                </Grid>               
+            </DockPanel>
+        </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>

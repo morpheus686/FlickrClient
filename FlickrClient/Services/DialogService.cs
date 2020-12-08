@@ -1,12 +1,9 @@
-﻿using FlickrClient.Components.Controls;
-using FlickrClient.DomainModel.Enumerations;
+﻿using FlickrClient.DomainModel.Enumerations;
 using FlickrClient.DomainModel.Services;
 using FlickrClient.View;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace FlickrClient.Services
 {
@@ -29,9 +26,12 @@ namespace FlickrClient.Services
             return mainWindow.DialogHost;            
         }
 
-        public Task<DialogResult> ShowDialog<VM>(VM viewModel, string dialogName)
-        { 
-            throw new NotImplementedException();    
+        public Task<object> ShowDialog<VM>(VM viewModel, string dialogName)
+        {
+            var view = _viewService.GetView(dialogName);
+            view.DataContext = viewModel;
+
+            return DialogHost.Show(view);
         }
 
         public async Task ShowIndeterminateDialog(Func<Task> progressTask)
@@ -40,9 +40,15 @@ namespace FlickrClient.Services
             _dialogHost.Value.DialogContent = _viewService.GetView(IndeterminateProgressDialogViewName);
 
             await progressTask();
-  
+
+             _dialogHost.Value.IsOpen = false;      
             _dialogHost.Value.DialogContent = null;   
-            _dialogHost.Value.IsOpen = false;     
+        }
+
+        public Task<object> ShowDialog(string dialogName)
+        {
+            var view = _viewService.GetView(dialogName);
+            return DialogHost.Show(view);
         }
     }
 }

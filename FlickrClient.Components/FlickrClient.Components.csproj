@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ViewAttribute.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Controls\DialogView.cs" />
     <Compile Include="Controls\LoadableView.cs" />
     <Compile Include="Controls\View.cs" />

@@ -110,6 +110,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\PhotoStream\PhotoStreamTabViewModel.cs" />
+    <Compile Include="ViewModel\Search\SearchItemViewModel.cs" />
+    <Compile Include="View\Authentification\AuthentificationDialogView.xaml.cs">
+      <DependentUpon>AuthentificationDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialog\IndeterminateProgressDialogView.xaml.cs">
       <DependentUpon>IndeterminateProgressDialogView.xaml</DependentUpon>
     </Compile>
@@ -119,6 +123,10 @@
     <Compile Include="View\Search\SearchTabView.xaml.cs">
       <DependentUpon>SearchTabView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Authentification\AuthentificationDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialog\IndeterminateProgressDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

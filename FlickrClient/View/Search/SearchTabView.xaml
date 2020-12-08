@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -68,17 +69,24 @@
             </Grid>
         </GroupBox>
 
-        <ListBox ItemsSource="{Binding Photos}" 
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>   
+            
+            <ListBox ItemsSource="{Binding Photos}" 
                  ItemTemplate="{StaticResource ResultPreview}"
-                 Grid.Row="2"
+                 Grid.Row="0"
                  BorderThickness="1"
                  BorderBrush="DarkGray"
                  Margin="10">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>        
-        </ListBox>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>        
+            </ListBox>
+        </Grid>
     </Grid>
 </UserControl>
