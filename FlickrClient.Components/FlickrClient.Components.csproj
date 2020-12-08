@@ -69,6 +69,7 @@
     <Compile Include="Controls\DialogView.cs" />
     <Compile Include="Controls\LoadableView.cs" />
     <Compile Include="Controls\View.cs" />
+    <Compile Include="Converter\DateTimeToStringConverter.cs" />
     <Compile Include="Converter\FileInfoToStringConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelBinding.cs" />

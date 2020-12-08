@@ -18,6 +18,7 @@ namespace FlickrClient.ViewModel.Search
         public string LargeSquareThumbnailUrl { get => _photo.LargeSquareThumbnailUrl; }
         public string OwnerName { get => _photo.OwnerName; }
         public string Title { get => _photo.Title; }
+        public DateTime DateTaken { get => _photo.DateTaken; }
 
         public SearchItemViewModel(IDialogService dialogService, Photo photo)
         {

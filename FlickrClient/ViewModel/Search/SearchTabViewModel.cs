@@ -26,7 +26,6 @@ namespace FlickrClient.ViewModel.Search
 
         public IEnumerable<PhotoSearchSortOrder> SortOrder { get; set; }
         public PhotoSearchSortOrder SelectedSortOrder { get; set; }
-
         public string SearchText { get; set; }
 
         public AsyncCommand SearchCommand { get; }
@@ -57,7 +56,7 @@ namespace FlickrClient.ViewModel.Search
 
             PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions
             {
-                Extras = PhotoSearchExtras.AllUrls | PhotoSearchExtras.Description | PhotoSearchExtras.OwnerName,
+                Extras = PhotoSearchExtras.All,
                 SortOrder = SelectedSortOrder,
                 Tags = SearchText
             };

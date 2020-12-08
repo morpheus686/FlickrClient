@@ -1,16 +1,17 @@
 ﻿<controls:DialogView x:Class="FlickrClient.View.Authentification.AuthentificationDialogView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                     xmlns:controls="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                      xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
+                     xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
                      xmlns:vm="clr-namespace:FlickrClient.ViewModel.Dialog"
-             mc:Ignorable="d" 
-                       DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:AuthenticationDialogViewModel}}">
+                     mc:Ignorable="d" 
+                     DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:AuthenticationDialogViewModel}}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -82,5 +83,13 @@
                         Command="{Binding VerifyingCommand, Mode=OneTime}"/>
             </Grid>
         </GroupBox>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="4">
+            <TextBlock Text="Angemeldet als "
+                               Margin="5, 5, 0, 5"/>
+            <TextBlock Text="{Binding UserName, Mode=OneWay}"
+                               Margin="0, 5, 5, 5"/>
+        </StackPanel>
     </Grid>
 </controls:DialogView>

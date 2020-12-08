@@ -7,7 +7,9 @@
         xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
         xmlns:vm="clr-namespace:FlickrClient.ViewModel"
         xmlns:svm="clr-namespace:FlickrClient.ViewModel.Search"
+        xmlns:psvm="clr-namespace:FlickrClient.ViewModel.PhotoStream"
         xmlns:sv="clr-namespace:FlickrClient.View.Search"
+        xmlns:psv="clr-namespace:FlickrClient.View.Photostream"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr" 
@@ -33,6 +35,10 @@
 
         <DataTemplate DataType="{x:Type svm:SearchTabViewModel}">
             <sv:SearchTabView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type psvm:PhotoStreamTabViewModel}">
+            <psv:PhotostreamTabView />
         </DataTemplate>
     </Window.Resources>
     
@@ -86,6 +92,7 @@
                                    VerticalAlignment="Center"
                                    FontSize="22"/>
                         <materialDesign:PopupBox Grid.Column="2"
+                                                 Margin="15"
                                                  StaysOpen="False"
                                                  PlacementMode="BottomAndAlignRightEdges">
                             <Button Content="Einloggen"

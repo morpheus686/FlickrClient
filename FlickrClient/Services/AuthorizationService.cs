@@ -69,5 +69,17 @@ namespace FlickrClient.Services
         {
             AuthorizationChanged?.Invoke(this, new AuthorizationChangedEventArgs());
         }
+
+        public string GetAuthorizationName()
+        {
+            var accessToken = _settingsService.GetOAuthAccessToken();
+
+            if (accessToken == null)
+            {
+                return string.Empty;
+            }
+
+            return accessToken.Username;
+        }
     }
 }

@@ -117,6 +117,12 @@
     <Compile Include="View\Dialog\IndeterminateProgressDialogView.xaml.cs">
       <DependentUpon>IndeterminateProgressDialogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Photostream\PhotostreamItemTemplate.xaml.cs">
+      <DependentUpon>PhotostreamItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Photostream\PhotostreamTabView.xaml.cs">
+      <DependentUpon>PhotostreamTabView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Search\SearchItemTemplate.xaml.cs">
       <DependentUpon>SearchItemTemplate.xaml</DependentUpon>
     </Compile>
@@ -153,6 +159,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Photostream\PhotostreamItemTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Photostream\PhotostreamTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Search\SearchItemTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

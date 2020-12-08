@@ -8,7 +8,7 @@ using FlickrClient.ViewModel.Search;
 
 namespace FlickrClient
 {
-    public class AutofacConfiguration : Autofac.Module
+    public class AutofacConfiguration : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -41,9 +41,9 @@ namespace FlickrClient
 
             builder.RegisterType<AuthenticationDialogViewModel>();
 
-            //builder.RegisterType<PhotoStreamTabViewModel>()
-            //    .As<TabViewModel>()
-            //    .SingleInstance();
+            builder.RegisterType<PhotoStreamTabViewModel>()
+                .As<TabViewModel>()
+                .SingleInstance();
         }
     }
 }

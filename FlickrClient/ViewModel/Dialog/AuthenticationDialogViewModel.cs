@@ -20,6 +20,7 @@ namespace FlickrClient.ViewModel.Dialog
         public ICommand VerifyingCommand { get; }
 
         public string VerificationCode { get; set; }
+        public string UserName { get => _authorizationService.GetAuthorizationName(); }
 
         public AuthenticationDialogViewModel(IAuthorizationService authorizationService)
         {
@@ -32,6 +33,7 @@ namespace FlickrClient.ViewModel.Dialog
         private async void ExecuteVerifyingCommand()
         {
             await _authorizationService.EndAuthenfication(_requestToken, VerificationCode);
+            RaisePropertyChanged(nameof(UserName));
         }
 
         private bool CanExecuteVerifyingCommand()

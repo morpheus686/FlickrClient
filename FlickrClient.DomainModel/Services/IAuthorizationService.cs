@@ -15,5 +15,6 @@ namespace FlickrClient.DomainModel.Services
         event AuthorizationChangedEventHandler AuthorizationChanged;
         Task<OAuthRequestToken> BeginAuthentification();
         Task EndAuthenfication(OAuthRequestToken oAuthRequestToken, string verificationCode);
+        string GetAuthorizationName();
     }
 }
