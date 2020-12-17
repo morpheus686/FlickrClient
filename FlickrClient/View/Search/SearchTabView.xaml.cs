@@ -1,4 +1,6 @@
-﻿using FlickrClient.Components.ViewModel;
+﻿using FlickrClient.Components.Attributes;
+using FlickrClient.Components.Controls;
+using FlickrClient.Components.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,20 +21,12 @@ namespace FlickrClient.View.Search
     /// <summary>
     /// Interaktionslogik für SearchTabView.xaml
     /// </summary>
-    public partial class SearchTabView : UserControl
+    [View(nameof(SearchTabView))]
+    public partial class SearchTabView : TabView
     {
         public SearchTabView()
         {
             InitializeComponent();
-            Loaded += SearchTabView_Loaded;
-        }
-
-        private void SearchTabView_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is LoadableViewModel lvm)
-            {
-                lvm.Initialize();
-            }
         }
     }
 }

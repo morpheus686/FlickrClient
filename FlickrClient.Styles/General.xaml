@@ -3,19 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
     xmlns:components="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components">
-	<ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/MaterialDesignColors;component/Themes/MaterialDesignColor.Indigo.xaml" />
-		<ResourceDictionary Source="/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-		<ResourceDictionary Source="/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-		<ResourceDictionary Source="/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-		<ResourceDictionary Source="/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-
+    <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Dragablz;component/Themes/materialdesign.xaml"/>
-        <ResourceDictionary Source="ImageStyle.xaml" />
-        <!--<ResourceDictionary Source="TilePanelStyle.xaml" />-->
+        <ResourceDictionary Source="Controls/ImageStyle.xaml" />
+        <ResourceDictionary Source="MaterialDesignDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageStyle}" />
     <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
-    <!--<Style TargetType="{x:Type components:TilePanel}" BasedOn="{StaticResource TilePanelStyle}" />-->
 </ResourceDictionary>

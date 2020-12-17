@@ -109,6 +109,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="ViewModel\NavigationItemViewModel.cs" />
+    <Compile Include="ViewModel\PhotoStream\PhotostreamItemViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotoStreamTabViewModel.cs" />
     <Compile Include="ViewModel\Search\SearchItemViewModel.cs" />
     <Compile Include="View\Authentification\AuthentificationDialogView.xaml.cs">

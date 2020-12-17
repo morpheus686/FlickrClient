@@ -1,10 +1,6 @@
-﻿using CommonServiceLocator;
-using FlickrClient.Components.Commands;
+﻿using FlickrClient.Components.Commands;
 using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -12,24 +8,33 @@ namespace FlickrClient.ViewModel
 {
     public class MainWindowViewModel : LoadableViewModel
     {
-        private readonly ObservableCollection<TabViewModel> _tabCollection;
         private readonly IDialogService _dialogService;
-
-        public TabViewModel SelectedTab { get; set; }
-
+        private readonly INavigationService _navigationService;
+             
         public ICommand OpenAuthentificationDialogCommand { get;}
+        public ICommand ShowSearchTabCommand { get; }
+        public ICommand ShowPhotostreamTabCommand { get; set; }
 
-        public ObservableCollection<TabViewModel> TabCollection
-        {
-            get { return _tabCollection; }
-        }
 
-        public MainWindowViewModel(IDialogService dialogService)
+        public MainWindowViewModel(IDialogService dialogService,
+            INavigationService navigationService)
         {
-            _tabCollection = new ObservableCollection<TabViewModel>();
             _dialogService = dialogService;
+            _navigationService = navigationService;
 
             OpenAuthentificationDialogCommand = new AsyncCommand(ExecuteOpenAuthentificationDialogCommand);
+            ShowSearchTabCommand = new Command(ExecuteShowSearchTab);
+            ShowPhotostreamTabCommand = new Command(ExecuteShowPhotostreamTab);
+        }
+
+        private void ExecuteShowSearchTab()
+        {
+            _navigationService.SetMainArea("SearchTabView");
+        }
+
+        private void ExecuteShowPhotostreamTab()
+        {
+            _navigationService.SetMainArea("PhotostreamTabView");
         }
 
         private async Task ExecuteOpenAuthentificationDialogCommand()
@@ -39,15 +44,7 @@ namespace FlickrClient.ViewModel
 
         protected override void InitializeInternal()
         {
-            var tabs = ServiceLocator.Current.GetAllInstances<TabViewModel>();
-
-            foreach (var tab in tabs)
-            {
-                _tabCollection.Add(tab);
-            }
-
-            SelectedTab = tabs.FirstOrDefault();
-            RaisePropertyChanged(nameof(SelectedTab));
+            _navigationService.SetMainArea("SearchTabView");
         }
     }
 }

@@ -12,5 +12,6 @@ namespace FlickrClient.DomainModel.Services
         Task<object> ShowDialog<VM>(VM viewModel, string DialogName);
         Task<object> ShowDialog(string dialogName);
         Task ShowIndeterminateDialog(Func<Task> progressTask);
+        Task ShowIndeterminateDialog(Func<Task, Task> progressTask, Task worktask);
     }
 }

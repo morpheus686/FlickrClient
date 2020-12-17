@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FlickrClient.View.Search"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converter="clr-namespace:FlickrClient.Components.Converter;assembly=FlickrClient.Components"
              mc:Ignorable="d" 
@@ -33,9 +32,9 @@
                                    Margin="2"
                                    TextWrapping="Wrap"/>
                 <TextBlock Margin="2"
-                                   Text="{Binding DateTaken, Converter={StaticResource DateTimeToStringConverter}, Mode=OneWay}" />
+                           Text="{Binding DateTaken, Converter={StaticResource DateTimeToStringConverter}, Mode=OneWay}" />
                 <TextBlock Margin="2"
-                                   Text="{Binding OwnerName, Mode=OneWay}" />
+                           Text="{Binding OwnerName, Mode=OneWay}" />
             </StackPanel>
         </Grid>
     </materialDesign:Card>

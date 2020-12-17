@@ -32,17 +32,19 @@ namespace FlickrClient
                 .As<ISettingsService>()
                 .SingleInstance();
 
-            builder.RegisterType<MainWindowViewModel>()
+            builder.RegisterType<NavigationService>()
+                .As<INavigationService>()
                 .SingleInstance();
 
+            builder.RegisterType<MainWindowViewModel>()
+                .SingleInstance(); 
+
             builder.RegisterType<SearchTabViewModel>()
-                .As<TabViewModel>()
                 .SingleInstance();
 
             builder.RegisterType<AuthenticationDialogViewModel>();
 
             builder.RegisterType<PhotoStreamTabViewModel>()
-                .As<TabViewModel>()
                 .SingleInstance();
         }
     }

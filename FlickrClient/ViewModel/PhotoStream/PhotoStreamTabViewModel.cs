@@ -12,10 +12,9 @@ namespace FlickrClient.ViewModel.PhotoStream
     {
         private readonly IFlickrService _flickrService;
         private readonly IDialogService _dialogService;
+        private List<PhotostreamItemViewModel> _photos;
 
-        private PhotoCollection _photos;
-
-        public PhotoCollection Photos
+        public List<PhotostreamItemViewModel> Photos
         {
             get => _photos;
             private set
@@ -33,8 +32,30 @@ namespace FlickrClient.ViewModel.PhotoStream
 
             Header = "Photostream";
             PackIconKind = MaterialDesignThemes.Wpf.PackIconKind.PhotoLibrary;
+        }
 
-            Photos = _flickrService.GetAuthorizationInstance().PeopleGetPhotos(PhotoSearchExtras.All);
+        protected override async Task InitializeInternalAsync()
+        {
+            var taskCompletion = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
+
+            _flickrService.GetAuthorizationInstance()
+                .PeopleGetPhotosAsync(
+                    PhotoSearchExtras.All,
+                    result =>
+                    {
+                        taskCompletion.SetResult(result);
+                    });
+
+            var photos = await taskCompletion.Task;
+
+            if (photos.HasError)
+            {
+                return;
+            }
+
+            Photos = photos.Result
+                .Select(photo => new PhotostreamItemViewModel(photo, _dialogService))
+                .ToList(); ;
         }
     }
 }

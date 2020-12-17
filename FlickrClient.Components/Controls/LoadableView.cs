@@ -1,32 +1,27 @@
-﻿using FlickrClient.Components.ViewModel;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using CommonServiceLocator;
+using FlickrClient.Components.ViewModel;
+using FlickrClient.DomainModel.Services;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace FlickrClient.Components.Controls
 {
     public class LoadableView : View
-    {
-        public static readonly DependencyProperty IsLoadingProperty =
-            DependencyProperty.Register(
-                "IsLoading",
-                typeof(bool),
-                typeof(LoadableView),
-                new PropertyMetadata(false));
+    {       
+        private readonly IDialogService _dialogService;
 
-        public bool IsLoading
-        {
-            get { return (bool)GetValue(IsLoadingProperty); }
-            set { SetValue(IsLoadingProperty, value); }
-        }
-
-        public LoadableView()
+        public LoadableView() : this(GetDialogService())
         {
             Loaded += View_Loaded;
+        }
+
+        public LoadableView(IDialogService dialogService)
+        {
+            _dialogService = dialogService;
+        }
+
+        private static IDialogService GetDialogService()
+        {
+            return ServiceLocator.Current.GetInstance<IDialogService>();
         }
 
         private async void View_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -38,12 +33,15 @@ namespace FlickrClient.Components.Controls
                 if (loadTask.IsCompleted)
                 {
                     return;
-                } 
+                }
 
-                IsLoading = true;
-                await loadTask;
-                IsLoading = false;
+                await _dialogService.ShowIndeterminateDialog(LoadDialog, loadTask);
             }
+        }
+
+        private Task LoadDialog(Task loadingTask)
+        {
+            return loadingTask;
         }
     }
 }

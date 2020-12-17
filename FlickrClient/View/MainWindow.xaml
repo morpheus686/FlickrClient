@@ -5,43 +5,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
+        xmlns:controls="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
         xmlns:vm="clr-namespace:FlickrClient.ViewModel"
-        xmlns:svm="clr-namespace:FlickrClient.ViewModel.Search"
-        xmlns:psvm="clr-namespace:FlickrClient.ViewModel.PhotoStream"
-        xmlns:sv="clr-namespace:FlickrClient.View.Search"
-        xmlns:psv="clr-namespace:FlickrClient.View.Photostream"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr" 
         Background="{StaticResource MaterialDesignPaper}"
         FontFamily="{StaticResource MaterialDesignFont}"
         Width="1000"
-        Height="600">
-    <Window.Resources>
-        <DataTemplate x:Key="TabItemTemplate">
-            <StackPanel Orientation="Horizontal"
-                        Margin="10, 0"
-                        Height="45">
-                <materialDesign:PackIcon Kind="{Binding PackIconKind, Mode=OneWay}" 
-                                         VerticalAlignment="Center"
-                                         Width="20"
-                                         Height="20"
-                                         Foreground="Gray"/>
-                <TextBlock Text="{Binding Header, Mode=OneWay}" 
-                           Margin="10"
-                           Foreground="Gray"/>
-            </StackPanel>
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type svm:SearchTabViewModel}">
-            <sv:SearchTabView/>
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type psvm:PhotoStreamTabViewModel}">
-            <psv:PhotostreamTabView />
-        </DataTemplate>
-    </Window.Resources>
-    
+        Height="600"> 
     <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
                                Identifier="DialogHost"
                                x:Name="DialogHost">
@@ -59,10 +31,45 @@
                     <StackPanel>
                         <Image Height="200"
                                     Source="/FlickrClient;component/48755906586_5d1091bdc5_w.jpg"/>
-                        <ListView FontSize="18" ItemsSource="{Binding TabCollection, Mode=OneWay}"
-                                        SelectedItem="{Binding SelectedTab}"
-                                        ItemTemplate="{StaticResource ResourceKey=TabItemTemplate}"
-                                        x:Name="TabListView" />
+
+                        <RadioButton Command="{Binding ShowSearchTabCommand, Mode=OneTime}"
+                                     Style="{StaticResource MaterialDesignToolRadioButton}">
+                            <RadioButton.Content>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="10, 0"
+                                            Height="45">
+                                    <materialDesign:PackIcon Kind="Search" 
+                                                    VerticalAlignment="Center"
+                                                    Width="30"
+                                                    Height="30"
+                                                    Foreground="Gray"/>
+                                    <TextBlock Text="Suchen" 
+                                                Margin="10"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                                Foreground="Gray"/>
+                                </StackPanel>
+                            </RadioButton.Content>
+                        </RadioButton>
+                        <RadioButton Command="{Binding ShowPhotostreamTabCommand, Mode=OneTime}"
+                                     Style="{StaticResource MaterialDesignToolRadioButton}">
+                            <RadioButton.Content>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="10, 0"
+                                            Height="45">
+                                    <materialDesign:PackIcon Kind="PhotoLibrary" 
+                                                    VerticalAlignment="Center"
+                                                    Width="30"
+                                                    Height="30"
+                                                    Foreground="Gray"/>
+                                    <TextBlock Text="Photostream" 
+                                                Margin="10"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                                Foreground="Gray"/>
+                                </StackPanel>
+                            </RadioButton.Content>
+                        </RadioButton>
                     </StackPanel>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
@@ -97,15 +104,12 @@
                                                  PlacementMode="BottomAndAlignRightEdges">
                             <Button Content="Einloggen"
                                     Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}"/>
-
-                        </materialDesign:PopupBox>
+                        </materialDesign:PopupBox>                        
                     </Grid>
                 </materialDesign:ColorZone>
 
-                <Grid>
-                    <ContentControl Content="{Binding SelectedItem, ElementName=TabListView, Mode=OneWay}" 
-                                    Grid.Row="1"/>                    
-                </Grid>               
+                <ContentControl x:Name="MainArea"
+                                Grid.Row="1"/>                                
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>

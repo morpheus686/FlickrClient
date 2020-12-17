@@ -51,6 +51,7 @@
     <Compile Include="Services\IAuthorizationService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IFlickrService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\IViewService.cs" />
   </ItemGroup>
