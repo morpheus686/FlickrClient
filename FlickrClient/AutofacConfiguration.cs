@@ -5,6 +5,7 @@ using FlickrClient.ViewModel;
 using FlickrClient.ViewModel.Authentification;
 using FlickrClient.ViewModel.PhotoStream;
 using FlickrClient.ViewModel.Search;
+using FlickrNet;
 
 namespace FlickrClient
 {
@@ -38,6 +39,10 @@ namespace FlickrClient
 
             builder.RegisterType<PhotostreamService>()
                 .As<IPhotostreamService>()
+                .SingleInstance();
+
+            builder.RegisterType<PhotoSearchService>()
+                .As<IPhotoSearchService>()
                 .SingleInstance();
 
             builder.RegisterType<MainWindowViewModel>()

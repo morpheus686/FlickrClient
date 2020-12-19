@@ -13,6 +13,7 @@ namespace FlickrClient.ViewModel.Search
     {  
         private readonly IFlickrService _flickrService;
         private readonly IDialogService _dialogService;
+        private readonly IPhotoSearchService _photoSearchService;
 
         private List<SearchItemViewModel> _photos;
 
@@ -33,10 +34,12 @@ namespace FlickrClient.ViewModel.Search
         public AsyncCommand SearchCommand { get; }
 
         public SearchTabViewModel(IFlickrService flickrService,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            IPhotoSearchService photoSearchService)
         {
             _flickrService = flickrService;
             _dialogService = dialogService;
+            _photoSearchService = photoSearchService;
 
             SortOrder =  Enum.GetValues(typeof(PhotoSearchSortOrder)).Cast<PhotoSearchSortOrder>();
             SelectedSortOrder = PhotoSearchSortOrder.Relevance;
@@ -53,22 +56,7 @@ namespace FlickrClient.ViewModel.Search
         {        
             Photos = null;
 
-            PhotoSearchOptions photoSearchOptions = new PhotoSearchOptions
-            {
-                Extras = PhotoSearchExtras.All,
-                SortOrder = SelectedSortOrder,
-                Tags = SearchText
-            };
-
-            var flickr = _flickrService.GetInstance();
-            var taskCompletionSource = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
-
-            flickr.PhotosSearchAsync(photoSearchOptions, result =>
-            {
-                taskCompletionSource.SetResult(result);
-            });
-
-            var searchResult = await taskCompletionSource.Task;
+            var searchResult = await _photoSearchService.SearchPhotos(SearchText, SelectedSortOrder);
 
             if (!searchResult.HasError)
             {

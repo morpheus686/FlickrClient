@@ -110,6 +110,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\PhotoSearchService.cs" />
     <Compile Include="Services\PhotostreamService.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotostreamItemViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotoStreamTabViewModel.cs" />
