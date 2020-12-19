@@ -5,7 +5,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
-        xmlns:controls="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
         xmlns:vm="clr-namespace:FlickrClient.ViewModel"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
@@ -74,11 +73,11 @@
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
 
-            <DockPanel >
+            <DockPanel>
                 <materialDesign:ColorZone Padding="0"
-                                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                        Mode="PrimaryMid"
-                                        DockPanel.Dock="Top"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          Mode="PrimaryMid"
+                                          DockPanel.Dock="Top"
                                           ClipToBounds="False">
                     <Grid>
                         <Grid.ColumnDefinitions>

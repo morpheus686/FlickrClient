@@ -2,7 +2,7 @@
 using FlickrClient.DomainModel.Services;
 using FlickrClient.Services;
 using FlickrClient.ViewModel;
-using FlickrClient.ViewModel.Dialog;
+using FlickrClient.ViewModel.Authentification;
 using FlickrClient.ViewModel.PhotoStream;
 using FlickrClient.ViewModel.Search;
 
@@ -36,13 +36,17 @@ namespace FlickrClient
                 .As<INavigationService>()
                 .SingleInstance();
 
+            builder.RegisterType<PhotostreamService>()
+                .As<IPhotostreamService>()
+                .SingleInstance();
+
             builder.RegisterType<MainWindowViewModel>()
                 .SingleInstance(); 
 
             builder.RegisterType<SearchTabViewModel>()
                 .SingleInstance();
 
-            builder.RegisterType<AuthenticationDialogViewModel>();
+            builder.RegisterType<AuthentificationDialogViewModel>();
 
             builder.RegisterType<PhotoStreamTabViewModel>()
                 .SingleInstance();

@@ -1,18 +1,25 @@
-﻿using FlickrClient.DomainModel.Services;
+﻿using FlickrClient.Components.ViewModel;
+using FlickrClient.DomainModel.Services;
 using FlickrNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FlickrClient.ViewModel.PhotoStream
 {
-    public class PhotoStreamTabViewModel : TabViewModel
+    public class PhotoStreamTabViewModel : LoadableViewModel
     {
-        private readonly IFlickrService _flickrService;
+        private const int FirstPageNumber = 1;
+
+        private readonly IPhotostreamService _photostreamService;
         private readonly IDialogService _dialogService;
+        private readonly ISettingsService _settingsService;
+
         private List<PhotostreamItemViewModel> _photos;
+
+        public PageNavigationViewModel PageNavigationViewModel { get; }
 
         public List<PhotostreamItemViewModel> Photos
         {
@@ -24,29 +31,43 @@ namespace FlickrClient.ViewModel.PhotoStream
             }
         }
 
-        public PhotoStreamTabViewModel(IFlickrService flickrService,
-            IDialogService dialogService)
+        public PhotoStreamTabViewModel(IPhotostreamService photoSearchService,
+            IDialogService dialogService,
+            ISettingsService settingsService)
         {
-            _flickrService = flickrService;
+            _photostreamService = photoSearchService;
             _dialogService = dialogService;
 
-            Header = "Photostream";
-            PackIconKind = MaterialDesignThemes.Wpf.PackIconKind.PhotoLibrary;
+            _settingsService = settingsService;
+            PageNavigationViewModel = new PageNavigationViewModel(GoToNextPage, GoToPreviousPage);
         }
 
-        protected override async Task InitializeInternalAsync()
+        private Task GoToPreviousPage()
         {
-            var taskCompletion = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
+            return _dialogService.ShowIndeterminateDialog(PreviousPageTask);
+        }
 
-            _flickrService.GetAuthorizationInstance()
-                .PeopleGetPhotosAsync(
-                    PhotoSearchExtras.All,
-                    result =>
-                    {
-                        taskCompletion.SetResult(result);
-                    });
+        private Task PreviousPageTask()
+        {
+            int currentPage = PageNavigationViewModel.Page;
+            return GetPhotostream(--currentPage);
+        }
 
-            var photos = await taskCompletion.Task;
+        private Task GoToNextPage()
+        {
+            return _dialogService.ShowIndeterminateDialog(NextPageTask);                  
+        }
+
+        private Task NextPageTask()
+        {     
+            int currentPage = PageNavigationViewModel.Page;
+            return GetPhotostream(++currentPage);
+        }
+
+        public async Task GetPhotostream(int page)
+        {
+            int maxPhotosPerPage = _settingsService.GetMaxPhotosPerPage();
+            var photos = await _photostreamService.SearchUserPhotoStream(page, maxPhotosPerPage);
 
             if (photos.HasError)
             {
@@ -55,7 +76,22 @@ namespace FlickrClient.ViewModel.PhotoStream
 
             Photos = photos.Result
                 .Select(photo => new PhotostreamItemViewModel(photo, _dialogService))
-                .ToList(); ;
+                .ToList();
+
+            PageNavigationViewModel.Page = photos.Result.Page;
+            PageNavigationViewModel.PageCount = photos.Result.Pages;
+        }
+
+        protected override async Task InitializeInternalAsync()
+        {
+            try
+            {
+                await GetPhotostream(FirstPageNumber);
+            }
+            catch (AuthenticationRequiredException exception)
+            {
+                
+            }
         }
     }
 }

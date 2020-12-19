@@ -110,7 +110,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="ViewModel\NavigationItemViewModel.cs" />
+    <Compile Include="Services\PhotostreamService.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotostreamItemViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotoStreamTabViewModel.cs" />
     <Compile Include="ViewModel\Search\SearchItemViewModel.cs" />
@@ -154,10 +154,9 @@
     <Compile Include="Services\FlickrService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\ViewService.cs" />
-    <Compile Include="ViewModel\Dialog\AuthenticationDialogViewModel.cs" />
+    <Compile Include="ViewModel\Authentification\AuthentificationDialogViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Search\SearchTabViewModel.cs" />
-    <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

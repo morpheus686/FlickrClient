@@ -2,9 +2,6 @@
 using FlickrClient.DomainModel.Services;
 using FlickrNet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FlickrClient.Services
@@ -27,6 +24,9 @@ namespace FlickrClient.Services
 
         public async Task<OAuthRequestToken> BeginAuthentification()
         {
+            _settingsService.SetOAuthoAccessToken(null);
+            RaiseAuthorizationChanged();
+
             Flickr flickr = _flickrService.GetInstance();
             var tcs = new TaskCompletionSource<FlickrResult<OAuthRequestToken>>();
 
@@ -43,7 +43,7 @@ namespace FlickrClient.Services
             return requestTokenResult.Result;
         }
 
-        public async Task EndAuthenfication(OAuthRequestToken requestToken, string verificationCode)
+        public async Task EndAuthentification(OAuthRequestToken requestToken, string verificationCode)
         {
             if (String.IsNullOrEmpty(verificationCode))
             {

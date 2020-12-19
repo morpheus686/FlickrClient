@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace FlickrClient.ViewModel.Dialog
+namespace FlickrClient.ViewModel.Authentification
 {
-    public class AuthenticationDialogViewModel : LoadableViewModel
+    public class AuthentificationDialogViewModel : LoadableViewModel
     {
         private readonly IAuthorizationService _authorizationService;
         private OAuthRequestToken _requestToken;
@@ -22,17 +22,17 @@ namespace FlickrClient.ViewModel.Dialog
         public string VerificationCode { get; set; }
         public string UserName { get => _authorizationService.GetAuthorizationName(); }
 
-        public AuthenticationDialogViewModel(IAuthorizationService authorizationService)
+        public AuthentificationDialogViewModel(IAuthorizationService authorizationService)
         {
             _authorizationService = authorizationService;
 
-            AuthenficateCommand = new AsyncCommand(ExecuteAuthenficateCommand);
+            AuthenficateCommand = new AsyncCommand(ExecuteAuthentificateCommand);
             VerifyingCommand = new Command(CanExecuteVerifyingCommand, ExecuteVerifyingCommand);
         }
 
         private async void ExecuteVerifyingCommand()
         {
-            await _authorizationService.EndAuthenfication(_requestToken, VerificationCode);
+            await _authorizationService.EndAuthentification(_requestToken, VerificationCode);
             RaisePropertyChanged(nameof(UserName));
         }
 
@@ -41,9 +41,10 @@ namespace FlickrClient.ViewModel.Dialog
             return !string.IsNullOrWhiteSpace(VerificationCode);
         }
 
-        private async Task ExecuteAuthenficateCommand()
+        private async Task ExecuteAuthentificateCommand()
         {
             _requestToken = await _authorizationService.BeginAuthentification();
+            RaisePropertyChanged(nameof(UserName));
         }
     }
 }

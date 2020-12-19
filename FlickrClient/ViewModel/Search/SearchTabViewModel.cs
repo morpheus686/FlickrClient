@@ -1,4 +1,5 @@
 ﻿using FlickrClient.Components.Commands;
+using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
 using FlickrNet;
 using System;
@@ -8,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace FlickrClient.ViewModel.Search
 {
-    public class SearchTabViewModel : TabViewModel
-    {
-        private List<SearchItemViewModel> _photos;
+    public class SearchTabViewModel : LoadableViewModel
+    {  
         private readonly IFlickrService _flickrService;
         private readonly IDialogService _dialogService;
+
+        private List<SearchItemViewModel> _photos;
 
         public List<SearchItemViewModel> Photos
         {
@@ -33,9 +35,6 @@ namespace FlickrClient.ViewModel.Search
         public SearchTabViewModel(IFlickrService flickrService,
             IDialogService dialogService)
         {
-            Header = "Suchen";
-            PackIconKind = MaterialDesignThemes.Wpf.PackIconKind.Search;
-
             _flickrService = flickrService;
             _dialogService = dialogService;
 
