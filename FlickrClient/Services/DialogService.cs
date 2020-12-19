@@ -1,6 +1,7 @@
 ﻿using FlickrClient.DomainModel.Enumerations;
 using FlickrClient.DomainModel.Services;
 using FlickrClient.View;
+using FlickrClient.View.Dialog;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Threading.Tasks;
@@ -53,17 +54,33 @@ namespace FlickrClient.Services
             return DialogHost.Show(view);
         }
 
-        public async Task ShowIndeterminateDialog(Func<Task, Task> progressTask, Task worktask)
+        public async Task ShowIndeterminateDialog(Task worktask)
         {
             OpenIndeterminateProgressDialog();
-            await progressTask(worktask);
+            await worktask;
             CloseIndeterminateProgressDialog();
+        }
+
+        private void OpenIndeterminateProgressDialog(string message)
+        {
+            OpenIndeterminateProgressDialog();
+            var dialogView = (IndeterminateProgressDialogView)_dialogHost.Value.DialogContent;
+
+            dialogView.MessageTextBlock.Visibility = System.Windows.Visibility.Visible;
+            dialogView.MessageTextBlock.Text = message;
         }
 
         private void OpenIndeterminateProgressDialog()
         {
             _dialogHost.Value.IsOpen = true;
             _dialogHost.Value.DialogContent = _viewService.GetView(IndeterminateProgressDialogViewName);
+        }
+
+        public async Task ShowIndeterminateDialog(Func<Task> progressTask, string message)
+        {
+            OpenIndeterminateProgressDialog(message);
+            await progressTask();
+            CloseIndeterminateProgressDialog();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using FlickrClient.DomainModel.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace FlickrClient.DomainModel.Services
@@ -12,6 +8,7 @@ namespace FlickrClient.DomainModel.Services
         Task<object> ShowDialog<VM>(VM viewModel, string DialogName);
         Task<object> ShowDialog(string dialogName);
         Task ShowIndeterminateDialog(Func<Task> progressTask);
-        Task ShowIndeterminateDialog(Func<Task, Task> progressTask, Task worktask);
+        Task ShowIndeterminateDialog(Func<Task> progressTask, string message);
+        Task ShowIndeterminateDialog(Task worktask);
     }
 }

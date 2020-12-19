@@ -17,11 +17,18 @@
                                 Content="{materialDesign:PackIcon Kind=PagePrevious}"
                                 x:Name="PreviousPageButton"
                                 Command="{TemplateBinding PreviousPageCommand}"/>
-                        <TextBlock Text="{TemplateBinding Page}" 
-                                   FontSize="{TemplateBinding FontSize}"
+                        <TextBlock Text="Seite "
                                    VerticalAlignment="Center"
-                                   Margin="10"
-                                 Width="100"/>
+                                   FontSize="{TemplateBinding FontSize}"/>
+                        <TextBlock Text="{Binding Page, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                   FontSize="{TemplateBinding FontSize}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text=" von "
+                                   VerticalAlignment="Center"
+                                   FontSize="{TemplateBinding FontSize}"/>
+                        <TextBlock Text="{Binding PageCount, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                   FontSize="{TemplateBinding FontSize}"
+                                   VerticalAlignment="Center"/>
                         <Button Style="{StaticResource MaterialDesignIconButton}" 
                                 Content="{materialDesign:PackIcon Kind=PageNext}"
                                 x:Name="NextPageButton"

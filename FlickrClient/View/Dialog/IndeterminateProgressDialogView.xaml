@@ -4,10 +4,15 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                  xmlns:components="clr-namespace:FlickrClient.Components.Controls;assembly=FlickrClient.Components"
-                 xmlns:local="clr-namespace:FlickrClient.View.Dialog"
                  mc:Ignorable="d" >
-            <ProgressBar Width="24" Height="24" Margin="16"
-                         Style="{StaticResource MaterialDesignCircularProgressBar}"
-                         IsIndeterminate="True"
-                         Value="33"/>
+    <StackPanel Orientation="Vertical">
+        <ProgressBar Width="50" Height="50" Margin="16"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                     IsIndeterminate="True"/>
+        <TextBlock MaxWidth="300" 
+                   x:Name="MessageTextBlock"
+                   Visibility="Collapsed"
+                   TextWrapping="Wrap"
+                   Margin="16"/>        
+    </StackPanel>
 </components:View>

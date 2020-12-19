@@ -49,7 +49,7 @@ namespace FlickrClient.ViewModel.Search
 
         private async Task ExecuteSearchCommand()
         {
-            await _dialogService.ShowIndeterminateDialog(SearchFotosAsync);
+            await _dialogService.ShowIndeterminateDialog(SearchFotosAsync, $"Fotos von {SearchText} werden gesucht...");
         }
 
         private async Task SearchFotosAsync()

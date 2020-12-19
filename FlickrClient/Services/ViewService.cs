@@ -1,4 +1,5 @@
 ﻿using FlickrClient.Components.Attributes;
+using FlickrClient.Components.Exceptions;
 using FlickrClient.DomainModel.Services;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace FlickrClient.Services
         {
             if (!_viewDictionary.Value.ContainsKey(viewName))
             {
-                throw new Exception("View not found! Please check, if it is registered with the View attribute.");
+                throw new ViewNotFoundException();
             }
 
             return (FrameworkElement)Activator.CreateInstance(_viewDictionary.Value[viewName]);

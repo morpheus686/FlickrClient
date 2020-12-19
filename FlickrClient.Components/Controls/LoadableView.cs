@@ -28,20 +28,20 @@ namespace FlickrClient.Components.Controls
         {
             if (DataContext is LoadableViewModel lvm)
             {
-                Task loadTask = lvm.Initialize();
-
-                if (loadTask.IsCompleted)
-                {
-                    return;
-                }
-
-                await _dialogService.ShowIndeterminateDialog(LoadDialog, loadTask);
+                await InitializeViewModel(lvm);
             }
         }
 
-        private Task LoadDialog(Task loadingTask)
+        private async Task InitializeViewModel(LoadableViewModel lvm)
         {
-            return loadingTask;
+            Task loadTask = lvm.Initialize();
+
+            if (loadTask.IsCompleted)
+            {
+                return;
+            }
+
+            await _dialogService.ShowIndeterminateDialog(loadTask);
         }
     }
 }
