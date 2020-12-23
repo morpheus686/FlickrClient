@@ -1,11 +1,8 @@
 ﻿using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
-using FlickrNet;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace FlickrClient.ViewModel.PhotoStream
 {
@@ -55,16 +52,16 @@ namespace FlickrClient.ViewModel.PhotoStream
 
         private Task GoToNextPage()
         {
-            return _dialogService.ShowIndeterminateDialog(NextPageTask);                  
+            return _dialogService.ShowIndeterminateDialog(NextPageTask);
         }
 
         private Task NextPageTask()
-        {     
+        {
             int currentPage = PageNavigationViewModel.Page;
             return GetPhotostream(++currentPage);
         }
 
-        public async Task GetPhotostream(int page)
+        private async Task GetPhotostream(int page)
         {
             int maxPhotosPerPage = _settingsService.GetMaxPhotosPerPage();
             var photos = await _photostreamService.SearchUserPhotoStream(page, maxPhotosPerPage);
@@ -82,16 +79,9 @@ namespace FlickrClient.ViewModel.PhotoStream
             PageNavigationViewModel.PageCount = photos.Result.Pages;
         }
 
-        protected override async Task InitializeInternalAsync()
+        protected override Task InitializeInternalAsync()
         {
-            try
-            {
-                await GetPhotostream(FirstPageNumber);
-            }
-            catch (AuthenticationRequiredException exception)
-            {
-                
-            }
+            return GetPhotostream(FirstPageNumber);
         }
     }
 }

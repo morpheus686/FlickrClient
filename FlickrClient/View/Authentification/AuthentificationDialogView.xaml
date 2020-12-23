@@ -9,6 +9,10 @@
                      xmlns:vm="clr-namespace:FlickrClient.ViewModel.Authentification"
                      xmlns:validationRules="clr-namespace:FlickrClient.Components.ValidationRules;assembly=FlickrClient.Components"
                      mc:Ignorable="d" 
+                     Header="Authentifizierung"
+                     Width="400"
+                     DialogViewType="Close"
+                     Style="{StaticResource DialogViewStyle}"
                      DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:AuthentificationDialogViewModel}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,39 +24,17 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <materialDesign:ColorZone Grid.Row="0"
-                                  HorizontalAlignment="Stretch"
-                                  Mode="PrimaryDark">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Authenfizierung"
-                           HorizontalAlignment="Center"
-                           FontSize="18"
-                           VerticalAlignment="Center"/>
-                <Button HorizontalAlignment="Right"
-                        Grid.Column="1"
-                        Content="{materialDesign:PackIcon Kind=Close}"                         
-                        Background="Red"
-                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-            </Grid>
-
-        </materialDesign:ColorZone>
-        
-        <TextBlock Text="Bitte klicken Sie auf den Authenfizierung-Knopf. Sie werden anschließend auf die Flickr-Webseite weitergeleitet. Dort erhalten Sie den Verifizierungscode."
+       
+        <TextBlock Text="Bitte klicken Sie auf den Authentifizierung-Knopf. Sie werden anschließend auf die Flickr-Webseite weitergeleitet. Dort erhalten Sie den Verifizierungscode."
                    TextWrapping="Wrap"
                    Grid.Row="1"
-                   Margin="5"/>
+                   Margin="0,5"/>
 
         <GroupBox Grid.Row="2"
                   Header="Schritt 1"
-                  Margin="5">
+                  Margin="0,5">
             <Button Content="Authentifizierung" 
                     Margin="5"
                     Command="{Binding AuthenficateCommand, Mode=OneTime}"/>
@@ -60,7 +42,7 @@
 
         <GroupBox Grid.Row="3"
                   Header="Schritt 2"
-                  Margin="5">
+                  Margin="0,5">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />

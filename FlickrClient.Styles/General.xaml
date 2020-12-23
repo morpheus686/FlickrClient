@@ -7,10 +7,12 @@
         <ResourceDictionary Source="/Dragablz;component/Themes/materialdesign.xaml"/>
         <ResourceDictionary Source="Controls/ImageStyle.xaml" />
         <ResourceDictionary Source="Controls/PageNavigationControlStyle.xaml" />
+        <ResourceDictionary Source="Controls/DialogViewStyle.xaml" />
         <ResourceDictionary Source="/FlickrClient.Styles;component/MaterialDesignDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageStyle}" />
     <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
     <Style TargetType="{x:Type controls:PageNavigationControl}" BasedOn="{StaticResource PageNavigationControlStyle}" />
+    <Style TargetType="{x:Type controls:DialogView}" BasedOn="{StaticResource DialogViewStyle}" />
 </ResourceDictionary>

@@ -23,8 +23,11 @@
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>           
+            </Grid.ColumnDefinitions>
 
+            <ProgressBar IsIndeterminate="True"
+                         Grid.Column="0" Grid.Row="0"  
+                         Style="{StaticResource MaterialDesignCircularProgressBar}" />
             <Image Grid.Column="0" Grid.Row="0"               
                     Source="{Binding Small320Url, Mode=OneWay}"
                     Width="320"

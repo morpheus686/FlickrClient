@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:FlickrClient.View.Search"
                   xmlns:vm="clr-namespace:FlickrClient.ViewModel.Search"
                   xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
+                  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                   DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:SearchTabViewModel}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -26,50 +27,34 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Sucheinstellungen"
-                  Margin="10"
-                  Style="{StaticResource MaterialDesignCardGroupBox}">
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />                    
-                </Grid.ColumnDefinitions>
+        <Grid Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0"
-                           Grid.Column="0"
-                           Text="Suchbegriff"
-                           VerticalAlignment="Center"
-                           Margin="2"/>
-                <TextBox Grid.Row="0" Grid.Column="1"
+            <TextBox Grid.Row="0" Grid.Column="0"
+                         Width="400"
                          Margin="10,2,2,2"
+                     FontSize="20"
+                         HorizontalAlignment="Left"                         
                          VerticalAlignment="Center"
-                         Text="{Binding SearchText, Mode=TwoWay}"/>
-
-                <TextBlock Text="Sortierung" 
-                           Grid.Row="1" Grid.Column="0"
-                           VerticalAlignment="Center"/>
-                <ListBox ItemsSource="{Binding SortOrder, Mode=OneWay}"
-                         Style="{StaticResource MaterialDesignChoiceChipOutlineListBox}"
-                         SelectedItem="{Binding SelectedSortOrder, Mode=TwoWay}"
-                         Grid.Row="1" Grid.Column="1" 
-                         Margin="10,2,2,2"
-                         VerticalAlignment="Center"/>
-
-                <Button Grid.Column="1"
-                        Grid.Row="2"
+                         Text="{Binding SearchText, Mode=TwoWay}"
+                         materialDesign:TextFieldAssist.HasClearButton="True"/>
+            <Button Grid.Column="2"
+                        Grid.Row="0"
                         Content="Suchen" 
                         Width="200"
                         HorizontalAlignment="Right"
                         Margin="2"
                         Command="{Binding SearchCommand, Mode=OneTime}"/>
-            </Grid>
-        </GroupBox>
+        </Grid>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -80,9 +65,7 @@
             <ListBox ItemsSource="{Binding Photos}" 
                  ItemTemplate="{StaticResource ResultPreview}"
                  Grid.Row="0"
-                 BorderThickness="1"
-                 BorderBrush="DarkGray"
-                 Margin="10">
+                 Margin="0">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True"/>

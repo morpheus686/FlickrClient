@@ -1,6 +1,7 @@
 ﻿using CommonServiceLocator;
 using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
+using System;
 using System.Threading.Tasks;
 
 namespace FlickrClient.Components.Controls
@@ -41,7 +42,15 @@ namespace FlickrClient.Components.Controls
                 return;
             }
 
-            await _dialogService.ShowIndeterminateDialog(loadTask);
+            try
+            {
+                await _dialogService.ShowIndeterminateDialog(loadTask);
+            }
+            catch (Exception ex)
+            {
+                await _dialogService.ShowMessage(ex.Message);
+            }
+
         }
     }
 }

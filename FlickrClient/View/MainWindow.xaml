@@ -27,10 +27,7 @@
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
 
-                    <StackPanel>
-                        <Image Height="200"
-                                    Source="/FlickrClient;component/48755906586_5d1091bdc5_w.jpg"/>
-
+                    <StackPanel>     
                         <RadioButton Command="{Binding ShowSearchTabCommand, Mode=OneTime}"
                                      Style="{StaticResource MaterialDesignToolRadioButton}">
                             <RadioButton.Content>
