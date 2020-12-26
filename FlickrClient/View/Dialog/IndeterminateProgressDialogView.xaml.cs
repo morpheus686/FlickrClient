@@ -1,4 +1,5 @@
 ﻿using FlickrClient.Components.Attributes;
+using FlickrClient.Components.Controls;
 
 namespace FlickrClient.View.Dialog
 {
@@ -6,7 +7,7 @@ namespace FlickrClient.View.Dialog
     /// Interaktionslogik für IndeterminateProgressDialogView.xaml
     /// </summary>
     [View(nameof(IndeterminateProgressDialogView))]
-    public partial class IndeterminateProgressDialogView : Components.Controls.View
+    public partial class IndeterminateProgressDialogView : DialogView
     {
         public IndeterminateProgressDialogView()
         {

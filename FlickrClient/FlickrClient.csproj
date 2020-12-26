@@ -138,6 +138,7 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoSearchService.cs" />
     <Compile Include="Services\PhotostreamService.cs" />
+    <Compile Include="ViewModel\Dialog\IndeterminateProgressDialogViewModel.cs" />
     <Compile Include="ViewModel\Dialog\MessageDialogViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotostreamItemViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotoStreamTabViewModel.cs" />

@@ -10,13 +10,13 @@ namespace FlickrClient.ViewModel
     {
         private readonly IDialogService _dialogService;
         private readonly INavigationService _navigationService;
-             
-        public ICommand OpenAuthentificationDialogCommand { get;}
+
+        public ICommand OpenAuthentificationDialogCommand { get; }
         public ICommand ShowSearchTabCommand { get; }
         public ICommand ShowPhotostreamTabCommand { get; set; }
 
-
-        public MainWindowViewModel(IDialogService dialogService,
+        public MainWindowViewModel(
+            IDialogService dialogService,
             INavigationService navigationService)
         {
             _dialogService = dialogService;

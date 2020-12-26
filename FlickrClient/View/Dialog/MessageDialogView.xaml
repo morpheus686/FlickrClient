@@ -8,6 +8,8 @@
                      mc:Ignorable="d" 
                      DialogViewType="OK">
     <Grid>
-        <TextBlock Text="{Binding Message, Mode=OneTime}" />
+        <TextBlock Text="{Binding Message, Mode=OneTime}" 
+                   Margin="15,20,15,10"
+                   FontSize="16"/>
     </Grid>
 </controls:DialogView>

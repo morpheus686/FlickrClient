@@ -2,6 +2,7 @@
 using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FlickrClient.Components.Controls
@@ -39,6 +40,11 @@ namespace FlickrClient.Components.Controls
 
             if (loadTask.IsCompleted)
             {
+                if (loadTask.IsFaulted)
+                {
+                    await _dialogService.ShowMessage(loadTask.Exception.InnerExceptions.First().Message);
+                }
+
                 return;
             }
 

@@ -13,21 +13,32 @@ namespace FlickrClient.Services
             _flickrService = flickrService;
         }
 
-        public Task<FlickrResult<PhotoCollection>> SearchUserPhotoStream(int page, int imagesPerPage)
+        public async Task<FlickrResult<PhotoCollection>> SearchUserPhotoStream(int page, int imagesPerPage)
         {
-            var taskCompletion = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
+            FlickrResult<PhotoCollection> streamResult = null;
 
-            _flickrService.GetAuthorizationInstance()
-                .PeopleGetPhotosAsync(
-                    PhotoSearchExtras.All,
-                    page,
-                    imagesPerPage,
-                    result =>
-                    {
-                        taskCompletion.SetResult(result);
-                    });
+            try
+            {
+                var taskCompletion = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
 
-            return taskCompletion.Task;
+                _flickrService.GetAuthorizationInstance()
+                    .PeopleGetPhotosAsync(
+                        PhotoSearchExtras.All,
+                        page,
+                        imagesPerPage,
+                        result =>
+                        {
+                            taskCompletion.SetResult(result);
+                        });
+
+                streamResult = await taskCompletion.Task;
+            }
+            catch (System.Exception ex)
+            {
+                throw new System.Exception(ex.Message, ex);
+            }
+
+            return streamResult;
         }
     }
 }

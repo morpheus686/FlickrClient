@@ -8,42 +8,42 @@
         xmlns:vm="clr-namespace:FlickrClient.ViewModel"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
-        Title="Flickr" 
+        Title="Flickr"
         Background="{StaticResource MaterialDesignPaper}"
         FontFamily="{StaticResource MaterialDesignFont}"
         Width="1000"
-        Height="600"> 
-    <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}" 
+        Height="600">
+    <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
                                Identifier="DialogHost"
                                x:Name="DialogHost">
         <materialDesign:DrawerHost
             IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel Width="300">
-                    <ToggleButton 
-                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                    <ToggleButton
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                         DockPanel.Dock="Top"
-                        HorizontalAlignment="Right" 
+                        HorizontalAlignment="Right"
                         Margin="16"
-                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
 
-                    <StackPanel>     
+                    <StackPanel>
                         <RadioButton Command="{Binding ShowSearchTabCommand, Mode=OneTime}"
                                      Style="{StaticResource MaterialDesignToolRadioButton}">
                             <RadioButton.Content>
                                 <StackPanel Orientation="Horizontal"
                                             Margin="10, 0"
                                             Height="45">
-                                    <materialDesign:PackIcon Kind="Search" 
+                                    <materialDesign:PackIcon Kind="Search"
                                                     VerticalAlignment="Center"
                                                     Width="30"
                                                     Height="30"
-                                                    Foreground="Gray"/>
-                                    <TextBlock Text="Suchen" 
+                                                    Foreground="Gray" />
+                                    <TextBlock Text="Suchen"
                                                 Margin="10"
                                                FontSize="22"
                                                VerticalAlignment="Center"
-                                                Foreground="Gray"/>
+                                                Foreground="Gray" />
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
@@ -53,16 +53,16 @@
                                 <StackPanel Orientation="Horizontal"
                                             Margin="10, 0"
                                             Height="45">
-                                    <materialDesign:PackIcon Kind="PhotoLibrary" 
+                                    <materialDesign:PackIcon Kind="PhotoLibrary"
                                                     VerticalAlignment="Center"
                                                     Width="30"
                                                     Height="30"
-                                                    Foreground="Gray"/>
-                                    <TextBlock Text="Photostream" 
+                                                    Foreground="Gray" />
+                                    <TextBlock Text="Photostream"
                                                 Margin="10"
                                                FontSize="22"
                                                VerticalAlignment="Center"
-                                                Foreground="Gray"/>
+                                                Foreground="Gray" />
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
@@ -88,24 +88,24 @@
                                       IsChecked="False"
                                       AutomationProperties.Name="HamburgerToggleButton"
                                       HorizontalAlignment="Left"
-                                      Margin="16"/>
+                                      Margin="16" />
                         <TextBlock Text="Flickr Client"
                                    Grid.Column="1"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   FontSize="22"/>
+                                   FontSize="22" />
                         <materialDesign:PopupBox Grid.Column="2"
                                                  Margin="15"
                                                  StaysOpen="False"
                                                  PlacementMode="BottomAndAlignRightEdges">
                             <Button Content="Einloggen"
-                                    Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}"/>
-                        </materialDesign:PopupBox>                        
+                                    Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}" />
+                        </materialDesign:PopupBox>
                     </Grid>
                 </materialDesign:ColorZone>
 
                 <ContentControl x:Name="MainArea"
-                                Grid.Row="1"/>                                
+                                Grid.Row="1" />
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>

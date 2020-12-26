@@ -1,5 +1,4 @@
-﻿using FlickrClient.DomainModel.Enumerations;
-using FlickrClient.DomainModel.Services;
+﻿using FlickrClient.DomainModel.Services;
 using FlickrClient.View;
 using FlickrClient.View.Dialog;
 using FlickrClient.ViewModel.Dialog;
@@ -14,19 +13,13 @@ namespace FlickrClient.Services
         private const string IndeterminateProgressDialogViewName = "IndeterminateProgressDialogView";
         private const string MessageDialogViewName = "MessageDialogView";
 
-        private readonly IViewService _viewService;
         private readonly Lazy<DialogHost> _dialogHost;
+        private readonly IViewService _viewService;
 
         public DialogService(IViewService viewService)
         {
             _viewService = viewService;
             _dialogHost = new Lazy<DialogHost>(LoadDialogHost);
-        }
-
-        private DialogHost LoadDialogHost()
-        {     
-            MainWindow mainWindow = App.Current.MainWindow as MainWindow;
-            return mainWindow.DialogHost;            
         }
 
         public Task<object> ShowDialog<VM>(VM viewModel, string dialogName)
@@ -37,43 +30,28 @@ namespace FlickrClient.Services
             return DialogHost.Show(view);
         }
 
-        public Task ShowIndeterminateDialog(Func<Task> progressTask)
-        {
-            return ShowIndeterminateDialog(progressTask, string.Empty);
-        }
-
-        private void CloseIndeterminateProgressDialog()
-        {
-            _dialogHost.Value.IsOpen = false;
-            _dialogHost.Value.DialogContent = null;
-        }
-
         public Task<object> ShowDialog(string dialogName)
         {
             var view = _viewService.GetView(dialogName);
             return DialogHost.Show(view);
         }
 
+        public Task ShowIndeterminateDialog(Func<Task> progressTask)
+        {
+            return ShowIndeterminateDialog(progressTask, null);
+        }
+
         public async Task ShowIndeterminateDialog(Task worktask)
         {
-            OpenIndeterminateProgressDialog();
-            await worktask;
-            CloseIndeterminateProgressDialog();
-        }
-
-        private void OpenIndeterminateProgressDialog(string message)
-        {
-            OpenIndeterminateProgressDialog();
-            var dialogView = (IndeterminateProgressDialogView)_dialogHost.Value.DialogContent;
-
-            dialogView.MessageTextBlock.Visibility = System.Windows.Visibility.Visible;
-            dialogView.MessageTextBlock.Text = message;
-        }
-
-        private void OpenIndeterminateProgressDialog()
-        {
-            _dialogHost.Value.IsOpen = true;
-            _dialogHost.Value.DialogContent = _viewService.GetView(IndeterminateProgressDialogViewName);
+            try
+            {
+                OpenIndeterminateProgressDialog(null);
+                await worktask;
+            }
+            finally
+            {
+                CloseIndeterminateProgressDialog();
+            }
         }
 
         public async Task ShowIndeterminateDialog(Func<Task> progressTask, string message)
@@ -86,15 +64,36 @@ namespace FlickrClient.Services
             finally
             {
                 CloseIndeterminateProgressDialog();
-            } 
+            }
         }
 
-        public async Task ShowMessage(string message)
+        public Task ShowMessage(string message)
         {
             var view = _viewService.GetView(MessageDialogViewName);
             view.DataContext = new MessageDialogViewModel(message);
 
-            await DialogHost.Show(view);
+            return DialogHost.Show(view);
+        }
+
+        private void CloseIndeterminateProgressDialog()
+        {
+            _dialogHost.Value.IsOpen = false;
+            _dialogHost.Value.DialogContent = null;
+        }
+
+        private DialogHost LoadDialogHost()
+        {
+            MainWindow mainWindow = App.Current.MainWindow as MainWindow;
+            return mainWindow.DialogHost;
+        }
+
+        private void OpenIndeterminateProgressDialog(string message)
+        {
+            var indeterminateDialog = _viewService.GetView(IndeterminateProgressDialogViewName);
+            indeterminateDialog.DataContext = new IndeterminateProgressDialogViewModel(message);
+
+            _dialogHost.Value.DialogContent = indeterminateDialog;
+            _dialogHost.Value.IsOpen = true;
         }
     }
 }
