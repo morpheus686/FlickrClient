@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FlickrClient.Components.Controls
 {
     public class LoadableView : View
-    {       
+    {
         private readonly IDialogService _dialogService;
 
         public LoadableView() : this(GetDialogService())
@@ -50,13 +50,12 @@ namespace FlickrClient.Components.Controls
 
             try
             {
-                await _dialogService.ShowIndeterminateDialog(loadTask);
+                await loadTask;
             }
             catch (Exception ex)
             {
                 await _dialogService.ShowMessage(ex.Message);
             }
-
         }
     }
 }

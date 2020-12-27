@@ -135,11 +135,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\GroupService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoSearchService.cs" />
+    <Compile Include="Services\PhotoSetService.cs" />
     <Compile Include="Services\PhotostreamService.cs" />
     <Compile Include="ViewModel\Dialog\IndeterminateProgressDialogViewModel.cs" />
     <Compile Include="ViewModel\Dialog\MessageDialogViewModel.cs" />
+    <Compile Include="ViewModel\Photo\PhotoDetailsDialogViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotostreamItemViewModel.cs" />
     <Compile Include="ViewModel\PhotoStream\PhotoStreamTabViewModel.cs" />
     <Compile Include="ViewModel\Search\SearchItemViewModel.cs" />
@@ -157,6 +160,15 @@
     </Compile>
     <Compile Include="View\Photostream\PhotostreamTabView.xaml.cs">
       <DependentUpon>PhotostreamTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Photo\PhotoGroupItem.xaml.cs">
+      <DependentUpon>PhotoGroupItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Photo\PhotoPhotosetItem.xaml.cs">
+      <DependentUpon>PhotoPhotosetItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Photo\PhotoDetailsDialog.xaml.cs">
+      <DependentUpon>PhotoDetailsDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Search\SearchItemTemplate.xaml.cs">
       <DependentUpon>SearchItemTemplate.xaml</DependentUpon>
@@ -202,6 +214,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Photostream\PhotostreamTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Photo\PhotoGroupItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Photo\PhotoPhotosetItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Photo\PhotoDetailsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,75 +5,74 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/FlickrClient.Styles;component/MaterialDesignDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
-   
-    <Style TargetType="{x:Type controls:DialogView}" x:Key="DialogViewStyle" >
+
+    <Style TargetType="{x:Type controls:DialogView}" x:Key="DialogViewStyle">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:DialogView}" >
-                    <Grid Height="{TemplateBinding Height}"
-                          Width="{TemplateBinding Width}"
-                          Margin="0">
+                <ControlTemplate TargetType="{x:Type controls:DialogView}">
+                    <Grid
+                          Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
                         <TextBlock Text="{TemplateBinding Header}"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                                   Margin="20"
-                                   x:Name="HeaderTextBlock"/>
-                        <ContentPresenter Grid.Row="1" 
-                                          Margin="20,0"/>
-                        
-                        <StackPanel Grid.Row="2" Orientation="Horizontal"
-                                    HorizontalAlignment="Right">
-                            <Button Content="Schließen" 
-                                    x:Name="CloseButton"
-                                    Visibility="Collapsed"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    Margin="20"
-                                    Width="100"/>
-                            <Button Content="Ja" 
+                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                   Margin="0,0,0,10"
+                                   x:Name="HeaderTextBlock"
+                                   VerticalAlignment="Center" />
+
+                        <Button Margin="0,0,0,10"
+                                HorizontalAlignment="Right"
+                                Content="{materialDesign:PackIcon Kind=Close}"
+                                Style="{StaticResource  MaterialDesignIconButton}"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                x:Name="CloseButton"
+                                Visibility="Collapsed" />
+
+                        <ContentPresenter Grid.Row="1"
+                                          Margin="0,10" />
+
+                        <StackPanel Grid.Row="2"
+                                    Margin="0,10,0,0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    x:Name="ButtonBarStackPanel">
+                            <Button Content="Ja"
                                     x:Name="YesButton"
                                     Visibility="Collapsed"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                     CommandParameter="{x:Static controls:DialogResult.Yes}"
-                                    Margin="20"
-                                    Width="100"/>
-                            <Button Content="Nein" 
+                                    Width="100" />
+                            <Button Content="Nein"
                                     x:Name="NoButton"
                                     Visibility="Collapsed"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                     CommandParameter="{x:Static controls:DialogResult.No}"
-                                    Margin="20"
-                                    Width="100"/>
-                            <Button Content="OK" 
+                                    Width="100" />
+                            <Button Content="OK"
                                     x:Name="OKButton"
                                     Visibility="Collapsed"
                                     Width="100"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    Margin="20"/>
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" />
                         </StackPanel>
                     </Grid>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="Header" Value="{x:Null}">
                             <Setter TargetName="HeaderTextBlock" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        
+
                         <Trigger Property="Header" Value="">
                             <Setter TargetName="HeaderTextBlock" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        
+
                         <Trigger Property="DialogViewType" Value="Close">
                             <Setter TargetName="CloseButton" Property="Visibility" Value="Visible" />
                         </Trigger>
-                        
+
                         <Trigger Property="DialogViewType" Value="YesNo">
                             <Setter TargetName="YesButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="NoButton" Property="Visibility" Value="Visible" />
@@ -81,6 +80,10 @@
 
                         <Trigger Property="DialogViewType" Value="OK">
                             <Setter TargetName="OKButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger Property="DialogViewType" Value="None">
+                            <Setter TargetName="ButtonBarStackPanel" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

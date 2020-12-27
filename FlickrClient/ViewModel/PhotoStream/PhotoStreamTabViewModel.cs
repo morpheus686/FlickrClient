@@ -1,6 +1,7 @@
 ﻿using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,59 +11,48 @@ namespace FlickrClient.ViewModel.PhotoStream
     {
         private const int FirstPageNumber = 1;
 
-        private readonly IPhotostreamService _photostreamService;
         private readonly IDialogService _dialogService;
+        private readonly IPhotosetService _photosetService;
+        private readonly IGroupService _groupService;
+        private readonly IPhotostreamService _photostreamService;
         private readonly ISettingsService _settingsService;
-
-        private List<PhotostreamItemViewModel> _photos;
 
         public PageNavigationViewModel PageNavigationViewModel { get; }
 
-        public List<PhotostreamItemViewModel> Photos
+        public ObservableCollection<PhotostreamItemViewModel> Photos
         {
-            get => _photos;
-            private set
-            {
-                _photos = value;
-                RaisePropertyChanged();
-            }
+            get;
         }
 
         public PhotoStreamTabViewModel(IPhotostreamService photoSearchService,
             IDialogService dialogService,
-            ISettingsService settingsService)
+            ISettingsService settingsService,
+            IPhotosetService photosetService,
+            IGroupService groupService)
         {
             _photostreamService = photoSearchService;
             _dialogService = dialogService;
-
             _settingsService = settingsService;
+            _photosetService = photosetService;
+            _groupService = groupService;
+
             PageNavigationViewModel = new PageNavigationViewModel(GoToNextPage, GoToPreviousPage);
+            Photos = new ObservableCollection<PhotostreamItemViewModel>();
         }
 
-        private Task GoToPreviousPage()
+        protected override Task InitializeInternalAsync()
         {
-            return _dialogService.ShowIndeterminateDialog(PreviousPageTask);
+            return InitializeInternalAsync(GetPhotostream);
         }
 
-        private Task PreviousPageTask()
+        private Task GetPhotostream()
         {
-            int currentPage = PageNavigationViewModel.Page;
-            return GetPhotostream(--currentPage);
-        }
-
-        private Task GoToNextPage()
-        {
-            return _dialogService.ShowIndeterminateDialog(NextPageTask);
-        }
-
-        private Task NextPageTask()
-        {
-            int currentPage = PageNavigationViewModel.Page;
-            return GetPhotostream(++currentPage);
+            return GetPhotostream(FirstPageNumber);
         }
 
         private async Task GetPhotostream(int page)
         {
+            Photos.Clear();
             int maxPhotosPerPage = _settingsService.GetMaxPhotosPerPage();
             var photos = await _photostreamService.SearchUserPhotoStream(page, maxPhotosPerPage);
 
@@ -71,17 +61,35 @@ namespace FlickrClient.ViewModel.PhotoStream
                 return;
             }
 
-            Photos = photos.Result
-                .Select(photo => new PhotostreamItemViewModel(photo, _dialogService))
-                .ToList();
+            photos.Result
+                .Select(photo => new PhotostreamItemViewModel(photo, _dialogService, _photosetService, _groupService))
+                .ToList()
+                .ForEach(Photos.Add);
 
             PageNavigationViewModel.Page = photos.Result.Page;
             PageNavigationViewModel.PageCount = photos.Result.Pages;
         }
 
-        protected override Task InitializeInternalAsync()
+        private Task GoToNextPage()
         {
-            return GetPhotostream(FirstPageNumber);
+            return _dialogService.ShowIndeterminateDialog(NextPageTask);
+        }
+
+        private Task GoToPreviousPage()
+        {
+            return _dialogService.ShowIndeterminateDialog(PreviousPageTask);
+        }
+
+        private Task NextPageTask()
+        {
+            int currentPage = PageNavigationViewModel.Page;
+            return GetPhotostream(++currentPage);
+        }
+
+        private Task PreviousPageTask()
+        {
+            int currentPage = PageNavigationViewModel.Page;
+            return GetPhotostream(--currentPage);
         }
     }
 }

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace FlickrClient.ViewModel.Search
 {
-    public class SearchTabViewModel : LoadableViewModel
-    {  
+    public class SearchTabViewModel : ViewModelBase
+    {
         private readonly IFlickrService _flickrService;
         private readonly IDialogService _dialogService;
         private readonly IPhotoSearchService _photoSearchService;
@@ -20,8 +20,8 @@ namespace FlickrClient.ViewModel.Search
         public List<SearchItemViewModel> Photos
         {
             get { return _photos; }
-            private set 
-            { 
+            private set
+            {
                 _photos = value;
                 RaisePropertyChanged();
             }
@@ -41,7 +41,7 @@ namespace FlickrClient.ViewModel.Search
             _dialogService = dialogService;
             _photoSearchService = photoSearchService;
 
-            SortOrder =  Enum.GetValues(typeof(PhotoSearchSortOrder)).Cast<PhotoSearchSortOrder>();
+            SortOrder = Enum.GetValues(typeof(PhotoSearchSortOrder)).Cast<PhotoSearchSortOrder>();
             SelectedSortOrder = PhotoSearchSortOrder.Relevance;
 
             SearchCommand = new AsyncCommand(ExecuteSearchCommand);
@@ -53,7 +53,7 @@ namespace FlickrClient.ViewModel.Search
         }
 
         private async Task SearchFotosAsync()
-        {        
+        {
             Photos = null;
 
             var searchResult = await _photoSearchService.SearchPhotos(SearchText, SelectedSortOrder);

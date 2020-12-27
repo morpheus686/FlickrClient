@@ -69,8 +69,10 @@
     <Compile Include="Services\IAuthorizationService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IFlickrService.cs" />
+    <Compile Include="Services\IGroupService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPhotoSearchService.cs" />
+    <Compile Include="Services\IPhotosetService.cs" />
     <Compile Include="Services\IPhotostreamService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\IViewService.cs" />

@@ -2,16 +2,12 @@
 using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
 using FlickrNet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FlickrClient.ViewModel.Authentification
 {
-    public class AuthentificationDialogViewModel : LoadableViewModel
+    public class AuthentificationDialogViewModel : ViewModelBase
     {
         private readonly IAuthorizationService _authorizationService;
         private OAuthRequestToken _requestToken;

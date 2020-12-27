@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="FlickrClient.View.Photo.PhotoPhotosetItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ProgressBar IsIndeterminate="True"
+                    Style="{StaticResource MaterialDesignCircularProgressBar}"
+                    Grid.Column="0" />
+        <Image  Width="50"
+                Height="50"
+                Source="{Binding PhotosetSquareThumbnailUrl}"
+                Grid.Column="0" />
+        <TextBlock Text="{Binding Title, Mode=OneWay}"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    FontSize="16"
+                    VerticalAlignment="Center"
+                    materialDesign:TextBlockAssist.AutoToolTip="True" />
+    </Grid>
+</UserControl>

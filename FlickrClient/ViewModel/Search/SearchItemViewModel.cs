@@ -30,7 +30,7 @@ namespace FlickrClient.ViewModel.Search
 
         private Task ExecuteOpenDetailsCommand()
         {
-            return _dialogService.ShowDialog(this, "");
+            return _dialogService.ShowDialog(this, "PhotoDetailsDialog");
         }
     }
 }
