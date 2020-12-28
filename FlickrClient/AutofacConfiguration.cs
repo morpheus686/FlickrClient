@@ -44,7 +44,7 @@ namespace FlickrClient
                 .As<IPhotoSearchService>()
                 .SingleInstance();
 
-            builder.RegisterType<PhotoSetService>()
+            builder.RegisterType<PhotosetService>()
                 .As<IPhotosetService>()
                 .SingleInstance();
 

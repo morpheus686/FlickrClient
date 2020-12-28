@@ -58,14 +58,12 @@ namespace FlickrClient.ViewModel
             GroupCollection = new ObservableCollection<GroupFullInfo>();
         }
 
-        protected override async Task InitializeInternalAsync()
+        protected override Task InitializeInternalAsync()
         {
             IsLoadingPhotosets = true;
             IsLoadingGroups = true;
 
-            await Task.WhenAll(SetPhotosets(), SetGroups());
-
-            IsLoadingGroups = false;
+            return Task.WhenAll(SetPhotosets(), SetGroups());
         }
 
         private async Task SetPhotosets()
@@ -87,8 +85,8 @@ namespace FlickrClient.ViewModel
 
             foreach (var item in groupsets)
             {
-                var photoset = await _groupService.GetGroup(item.GroupId);
-                GroupCollection.Add(photoset);
+                var group = await _groupService.GetGroup(item.GroupId);
+                GroupCollection.Add(group);
             }
 
             IsLoadingGroups = false;

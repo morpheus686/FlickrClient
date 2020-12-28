@@ -1,33 +1,23 @@
 ﻿using FlickrClient.DomainModel.Services;
+using FlickrClient.Services.Tools;
 using FlickrNet;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace FlickrClient.Services
 {
-    public class PhotoSetService : IPhotosetService
+    internal class PhotosetService : IPhotosetService
     {
         private readonly IFlickrService _flickrService;
 
-        public PhotoSetService(IFlickrService flickrService)
+        public PhotosetService(IFlickrService flickrService)
         {
             _flickrService = flickrService;
         }
 
         public async Task<Collection<ContextSet>> GetPhotosetsOfPhoto(string photoId)
         {
-            var flickr = _flickrService.GetInstance();
-            var contextResultTcs = new TaskCompletionSource<FlickrResult<AllContexts>>();
-
-            flickr.PhotosGetAllContextsAsync(
-                photoId,
-                result =>
-                {
-                    contextResultTcs.SetResult(result);
-                });
-
-            var contextResult = await contextResultTcs.Task;
-
+            var contextResult = await ContextTools.GetAllContext(_flickrService, photoId);
             return contextResult.Result.Sets;
         }
 
@@ -43,9 +33,9 @@ namespace FlickrClient.Services
                     photoSetResultTcs.SetResult(result);
                 });
 
-            var contextResult = await photoSetResultTcs.Task;
+            var photosetResult = await photoSetResultTcs.Task;
 
-            return contextResult.Result;
+            return photosetResult.Result;
         }
     }
 }

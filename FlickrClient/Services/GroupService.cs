@@ -1,4 +1,5 @@
 ﻿using FlickrClient.DomainModel.Services;
+using FlickrClient.Services.Tools;
 using FlickrNet;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -16,18 +17,7 @@ namespace FlickrClient.Services
 
         public async Task<Collection<ContextGroup>> GetGroupsOfPhoto(string photoId)
         {
-            var flickr = _flickrService.GetInstance();
-            var contextResultTcs = new TaskCompletionSource<FlickrResult<AllContexts>>();
-
-            flickr.PhotosGetAllContextsAsync(
-                photoId,
-                result =>
-                {
-                    contextResultTcs.SetResult(result);
-                });
-
-            var contextResult = await contextResultTcs.Task;
-
+            var contextResult = await ContextTools.GetAllContext(_flickrService, photoId);
             return contextResult.Result.Groups;
         }
 
@@ -43,9 +33,9 @@ namespace FlickrClient.Services
                     groupResultTcs.SetResult(result);
                 });
 
-            var contextResult = await groupResultTcs.Task;
+            var groupResult = await groupResultTcs.Task;
 
-            return contextResult.Result;
+            return groupResult.Result;
         }
     }
 }

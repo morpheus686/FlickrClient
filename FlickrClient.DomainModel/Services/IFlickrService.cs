@@ -10,7 +10,7 @@ namespace FlickrClient.DomainModel.Services
     public interface IFlickrService
     {
         Flickr GetInstance();
-        Flickr GetAuthorizationInstance();
+
         bool HasAccessToken();
     }
 }

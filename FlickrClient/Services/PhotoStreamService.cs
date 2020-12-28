@@ -21,7 +21,7 @@ namespace FlickrClient.Services
             {
                 var taskCompletion = new TaskCompletionSource<FlickrResult<PhotoCollection>>();
 
-                _flickrService.GetAuthorizationInstance()
+                _flickrService.GetInstance()
                     .PeopleGetPhotosAsync(
                         PhotoSearchExtras.All,
                         page,

@@ -15,26 +15,19 @@ namespace FlickrClient.Services
             _settingsService = settingsService;
         }
 
-        public Flickr GetAuthorizationInstance()
+        public Flickr GetInstance()
         {
             var f = new Flickr(ApiKey, SharedSecret);
 
             OAuthAccessToken oAuthAccessToken = _settingsService.GetOAuthAccessToken();
 
-            if (oAuthAccessToken == null)
+            if (oAuthAccessToken != null)
             {
-                return GetInstance();
+                f.OAuthAccessToken = oAuthAccessToken.Token;
+                f.OAuthAccessTokenSecret = oAuthAccessToken.TokenSecret;
             }
 
-            f.OAuthAccessToken = oAuthAccessToken.Token;
-            f.OAuthAccessTokenSecret = oAuthAccessToken.TokenSecret;
-
             return f;
-        }
-
-        public Flickr GetInstance()
-        {
-            return new Flickr(ApiKey, SharedSecret);
         }
 
         public bool HasAccessToken()

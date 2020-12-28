@@ -138,8 +138,9 @@
     <Compile Include="Services\GroupService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PhotoSearchService.cs" />
-    <Compile Include="Services\PhotoSetService.cs" />
+    <Compile Include="Services\PhotosetService.cs" />
     <Compile Include="Services\PhotostreamService.cs" />
+    <Compile Include="Services\Tools\ContextTools.cs" />
     <Compile Include="ViewModel\Dialog\IndeterminateProgressDialogViewModel.cs" />
     <Compile Include="ViewModel\Dialog\MessageDialogViewModel.cs" />
     <Compile Include="ViewModel\Photo\PhotoDetailsDialogViewModel.cs" />

@@ -27,7 +27,7 @@
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
 
-                    <StackPanel>
+                    <StackPanel PreviewMouseLeftButtonUp="StackPanel_PreviewMouseLeftButtonUp">
                         <RadioButton Command="{Binding ShowSearchTabCommand, Mode=OneTime}"
                                      Style="{StaticResource MaterialDesignToolRadioButton}">
                             <RadioButton.Content>
