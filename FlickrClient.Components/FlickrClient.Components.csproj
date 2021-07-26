@@ -84,6 +84,7 @@
     <Compile Include="Attributes\ViewAttribute.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Controls\AddonDialogView.cs" />
     <Compile Include="Controls\DialogResult.cs" />
     <Compile Include="Controls\DialogView.cs" />
     <Compile Include="Controls\DialogViewType.cs" />

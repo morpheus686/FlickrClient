@@ -98,8 +98,11 @@
                                                  Margin="15"
                                                  StaysOpen="False"
                                                  PlacementMode="BottomAndAlignRightEdges">
-                            <Button Content="Einloggen"
-                                    Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}" />
+                            <StackPanel Orientation="Vertical">
+                                <Button Content="Einloggen"
+                                        Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}" />
+                                <Separator />
+                            </StackPanel>
                         </materialDesign:PopupBox>
                     </Grid>
                 </materialDesign:ColorZone>

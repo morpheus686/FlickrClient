@@ -18,8 +18,7 @@ namespace FlickrClient.Services
         public Flickr GetInstance()
         {
             var f = new Flickr(ApiKey, SharedSecret);
-
-            OAuthAccessToken oAuthAccessToken = _settingsService.GetOAuthAccessToken();
+            var oAuthAccessToken = _settingsService.GetOAuthAccessToken();
 
             if (oAuthAccessToken != null)
             {
