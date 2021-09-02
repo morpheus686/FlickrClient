@@ -1,4 +1,7 @@
-﻿using FlickrClient.Components.ViewModel;
+﻿using FlickrClient.Components.Attributes;
+using FlickrClient.Components.ViewModel;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -23,6 +26,13 @@ namespace FlickrClient.View
             {
                 lvm.Initialize();
             }
+
+            var addOnViewsWithViewAttribute = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(assembly => assembly.GetName().Name.StartsWith("Flickr"))
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.IsSubclassOf(typeof(FlickrClient.Components.Controls.AddonDialogView)))
+                .Where(type => type.CustomAttributes.Count() > 0)
+                .Where(type => type.CustomAttributes.Any(customAttribute => customAttribute.AttributeType == typeof(ViewAttribute)));
         }
 
         private void StackPanel_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

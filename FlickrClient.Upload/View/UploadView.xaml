@@ -1,4 +1,4 @@
-﻿<controls:AddonDialogView x:Class="FlickrClient.Upload.View.UploadView"
+﻿<controls:DialogView x:Class="FlickrClient.Upload.View.UploadView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,19 +7,51 @@
              xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
                          xmlns:vm="clr-namespace:FlickrClient.Upload.ViewModel"
              xmlns:local="clr-namespace:FlickrClient.Upload.View"
-                          Header="Upload"
+                          Header="Bilder hochladen"
                          DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:UploadViewModel}}"
+                     DialogViewType="Close"
              mc:Ignorable="d"
+                     Width="1000"
              d:DesignHeight="450" d:DesignWidth="800"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                     Style="{StaticResource DialogViewStyle}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                     d:DataContext="{d:DesignInstance Type=vm:UploadViewModel}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="600" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Bilder hier reinziehen"
+                   Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="20" />
+
+        <Rectangle Grid.Row="0"
+                   StrokeThickness="1"
+                   Stroke="Black"
+                   StrokeDashArray="5 4"
+                   Margin="0,5"
+                   AllowDrop="True"
+                   DragOver="Rectangle_DragOver"
+                   Drop="Rectangle_Drop"
+                   Fill="Transparent" />
         <ListBox ItemsSource="{Binding UploadItems, Mode=OneWay}"
-                 AllowDrop="True">
+                 Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:UploadItemTemplate />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Row="2"
+                    Margin="0,5">
+            <Button Content="Hochladen"
+                    Width="150"
+                    HorizontalAlignment="Right"
+                    Command="{Binding UploadCommand, Mode=OneTime}" />
+        </StackPanel>
     </Grid>
-</controls:AddonDialogView>
+</controls:DialogView>

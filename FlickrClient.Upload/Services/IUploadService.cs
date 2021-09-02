@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FlickrClient.Upload.Data;
+using System;
 using System.Threading.Tasks;
 
 namespace FlickrClient.Upload.Services
 {
-    public interface IUploadService
+    internal interface IUploadService
     {
+        Task UploadPictureAsync(UploadItem uploadItem, Action<int, bool> progress);
     }
 }

@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:FlickrClient.Components;assembly=FlickrClient.Components"
-        xmlns:vm="clr-namespace:FlickrClient.ViewModel"
+        xmlns:vm="clr-namespace:FlickrClient.ViewModel" d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
         mc:Ignorable="d"
         DataContext="{components:ViewModelBinding ViewModelType={x:Type vm:MainWindowViewModel}}"
         Title="Flickr"
@@ -102,6 +102,8 @@
                                 <Button Content="Einloggen"
                                         Command="{Binding OpenAuthentificationDialogCommand, Mode=OneTime}" />
                                 <Separator />
+                                <Button Content="Bilder hochladen"
+                                        Command="{Binding OpenUploadFotosDialogCommand, Mode=OneTime}" />
                             </StackPanel>
                         </materialDesign:PopupBox>
                     </Grid>

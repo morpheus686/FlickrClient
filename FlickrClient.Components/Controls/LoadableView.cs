@@ -9,21 +9,9 @@ namespace FlickrClient.Components.Controls
 {
     public class LoadableView : View
     {
-        private readonly IDialogService _dialogService;
-
-        public LoadableView() : this(GetDialogService())
+        public LoadableView()
         {
             Loaded += View_Loaded;
-        }
-
-        public LoadableView(IDialogService dialogService)
-        {
-            _dialogService = dialogService;
-        }
-
-        private static IDialogService GetDialogService()
-        {
-            return ServiceLocator.Current.GetInstance<IDialogService>();
         }
 
         private async void View_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -40,22 +28,10 @@ namespace FlickrClient.Components.Controls
 
             if (loadTask.IsCompleted)
             {
-                if (loadTask.IsFaulted)
-                {
-                    await _dialogService.ShowMessage(loadTask.Exception.InnerExceptions.First().Message);
-                }
-
                 return;
             }
 
-            try
-            {
-                await loadTask;
-            }
-            catch (Exception ex)
-            {
-                await _dialogService.ShowMessage(ex.Message);
-            }
+            await loadTask;
         }
     }
 }

@@ -6,40 +6,40 @@ namespace FlickrClient.Upload.ViewModel
 {
     internal class UploadItemViewModel : ViewModelBase
     {
-        private readonly UploadItem _uploadItem;
+        internal UploadItem UploadItem { get; }
 
         public UploadItemViewModel(UploadItem uploadItem)
         {
-            _uploadItem = uploadItem;
+            UploadItem = uploadItem;
         }
 
         public string Header
         {
-            get => _uploadItem.Header;
-            set => _uploadItem.Header = value;
+            get => UploadItem.Header;
+            set => UploadItem.Header = value;
         }
 
         public string Description
         {
-            get => _uploadItem.Description;
-            set => _uploadItem.Description = value;
+            get => UploadItem.Description;
+            set => UploadItem.Description = value;
         }
 
         public string Tags
         {
-            get => _uploadItem.Tags; set => _uploadItem.Tags = value;
+            get => UploadItem.Tags;
+            set => UploadItem.Tags = value;
         }
 
         public bool IsPublic
         {
-            get => _uploadItem.IsPublic;
-            set => _uploadItem.IsPublic = value;
+            get => UploadItem.IsPublic;
+            set => UploadItem.IsPublic = value;
         }
 
         public FileInfo Location
         {
-            get => _uploadItem.Location;
+            get => UploadItem.Location;
         }
-
     }
 }

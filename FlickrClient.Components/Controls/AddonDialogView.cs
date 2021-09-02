@@ -1,6 +1,6 @@
 ﻿namespace FlickrClient.Components.Controls
 {
-    public class AddonDialogView : DialogView
+    public abstract class AddonDialogView : DialogView
     {
     }
 }
