@@ -1,5 +1,6 @@
 ﻿using FlickrClient.Components.Attributes;
 using FlickrClient.Components.Controls;
+using FlickrClient.Upload.ViewModel;
 using System.Windows;
 
 namespace FlickrClient.Upload.View
@@ -36,6 +37,13 @@ namespace FlickrClient.Upload.View
             }
 
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (!(DataContext is UploadViewModel viewModel))
+            {
+                return;
+            }
+
+            viewModel.DropFilesCommand.Execute(files);
         }
     }
 }

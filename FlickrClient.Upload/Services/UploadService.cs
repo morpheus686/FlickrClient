@@ -2,7 +2,6 @@
 using FlickrClient.Upload.Data;
 using FlickrNet;
 using System;
-using System.Threading.Tasks;
 
 namespace FlickrClient.Upload.Services
 {
@@ -15,7 +14,7 @@ namespace FlickrClient.Upload.Services
             _flickrService = flickrService;
         }
 
-        public async Task UploadPictureAsync(UploadItem uploadItem, Action<int, bool> progress)
+        public string UploadPicture(UploadItem uploadItem, Action<int, bool> progress)
         {
             Flickr flickr = _flickrService.GetInstance();
 
@@ -24,26 +23,16 @@ namespace FlickrClient.Upload.Services
                 progress(e.ProcessPercentage, e.UploadComplete);
             };
 
-            var taskCompletionSource = new TaskCompletionSource<FlickrResult<string>>();
-
-            flickr.UploadPictureAsync(
-                null,
+            string result = flickr.UploadPicture(
                 uploadItem.Location.FullName,
                 uploadItem.Header,
                 uploadItem.Description,
                 uploadItem.Tags,
                 uploadItem.IsPublic,
-                true,
-                true,
-                ContentType.Photo,
-                SafetyLevel.Safe,
-                HiddenFromSearch.None,
-                (result) =>
-                {
-                    taskCompletionSource.SetResult(result);
-                });
+                false,
+                false);
 
-            var flickrResult = await taskCompletionSource.Task;
+            return result;
         }
     }
 }

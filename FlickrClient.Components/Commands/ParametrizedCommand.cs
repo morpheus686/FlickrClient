@@ -3,10 +3,10 @@ using System.Windows.Input;
 
 namespace FlickrClient.Components.Commands
 {
-    public class Command : ICommand
+    public class ParametrizedCommand<T> : ICommand
     {
-        private readonly Func<bool> _canExecuteHandler;
-        private readonly Action _executeHandler;
+        private readonly Func<T, bool> _canExecuteHandler;
+        private readonly Action<T> _executeHandler;
 
         public event EventHandler CanExecuteChanged
         {
@@ -14,13 +14,13 @@ namespace FlickrClient.Components.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public Command(Func<bool> canExecuteHandler, Action executeHandler)
+        public ParametrizedCommand(Func<T, bool> canExecuteHandler, Action<T> executeHandler)
         {
             _canExecuteHandler = canExecuteHandler;
             _executeHandler = executeHandler;
         }
 
-        public Command(Action executeHandler) : this(null, executeHandler)
+        public ParametrizedCommand(Action<T> executeHandler) : this(null, executeHandler)
         {
         }
 
@@ -31,12 +31,14 @@ namespace FlickrClient.Components.Commands
                 return true;
             }
 
-            return _canExecuteHandler();
+            T convertedParameter = (T)parameter;
+            return _canExecuteHandler(convertedParameter);
         }
 
         public void Execute(object parameter)
         {
-            _executeHandler();
+            T convertedParameter = (T)parameter;
+            _executeHandler(convertedParameter);
         }
     }
 }

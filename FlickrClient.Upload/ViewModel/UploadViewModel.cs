@@ -1,6 +1,5 @@
 ﻿using FlickrClient.Components.Commands;
 using FlickrClient.Components.ViewModel;
-using FlickrClient.DomainModel.Services;
 using FlickrClient.Upload.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +12,9 @@ namespace FlickrClient.Upload.ViewModel
     {
         private readonly IUploadService _uploadService;
 
-        private bool _hasAccessToken;
-
         public ObservableCollection<UploadItemViewModel> UploadItems { get; }
         public ICommand UploadCommand { get; }
+        public ICommand DropFilesCommand { get; }
 
         public UploadViewModel(
             IUploadService uploadService)
@@ -25,6 +23,16 @@ namespace FlickrClient.Upload.ViewModel
 
             UploadItems = new ObservableCollection<UploadItemViewModel>();
             UploadCommand = new AsyncCommand(UploadExecuted, CanExecuteUpload);
+            DropFilesCommand = new ParametrizedCommand<IEnumerable<string>>(DropFilesExecuted);
+        }
+
+        private void DropFilesExecuted(IEnumerable<string> fileList)
+        {
+            foreach (var item in fileList)
+            {
+                var uploadItemViewModel = new UploadItemViewModel(item, _uploadService);
+                UploadItems.Add(uploadItemViewModel);
+            }
         }
 
         private async Task UploadExecuted()
@@ -33,7 +41,7 @@ namespace FlickrClient.Upload.ViewModel
 
             foreach (var item in UploadItems)
             {
-                tasks.Add(_uploadService.UploadPictureAsync(item.UploadItem, null));
+                tasks.Add(item.UploadPictureAsync());
             }
 
             await Task.WhenAll(tasks);
@@ -41,7 +49,7 @@ namespace FlickrClient.Upload.ViewModel
 
         private bool CanExecuteUpload()
         {
-            return _hasAccessToken;
+            return true;
         }
     }
 }
