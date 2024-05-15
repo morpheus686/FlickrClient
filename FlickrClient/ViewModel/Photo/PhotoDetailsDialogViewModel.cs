@@ -20,6 +20,7 @@ namespace FlickrClient.ViewModel
         public string Description { get => _photo.Description; }
         public DateTime UploadDate { get => _photo.DateUploaded; }
         public DateTime TakenDate { get => _photo.DateTaken; }
+        public Collection<string> Tags { get => _photo.Tags; }
 
         public ObservableCollection<GroupFullInfo> GroupCollection { get; }
 
