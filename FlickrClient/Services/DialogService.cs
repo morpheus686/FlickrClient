@@ -1,6 +1,5 @@
 ﻿using FlickrClient.DomainModel.Services;
 using FlickrClient.View;
-using FlickrClient.View.Dialog;
 using FlickrClient.ViewModel.Dialog;
 using MaterialDesignThemes.Wpf;
 using System;
