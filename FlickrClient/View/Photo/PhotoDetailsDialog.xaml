@@ -98,5 +98,39 @@
                    MaxHeight="400"
                    Margin="0,10"
                    TextWrapping="Wrap" />
+        <Grid Grid.Row="2"
+              Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Hochgeladen am "
+                    Grid.Row="0"
+                    Grid.Column="0" 
+                    Margin="10,0,10,0"/>
+
+            <TextBlock Text="{Binding UploadDate, Mode=OneTime}"
+                    Grid.Row="0"
+                    Grid.Column="1" 
+                    Margin="10,0,10,0"/>
+
+            <TextBlock Text="Aufgenommen am "
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        Margin="10,0,10,0"/>
+
+            <TextBlock Text="{Binding TakenDate, Mode=OneTime}"
+                    Grid.Row="1"
+                    Grid.Column="1" 
+                    Margin="10,0,10,0"/>
+        </Grid>
+
     </Grid>
 </controls:DialogView>

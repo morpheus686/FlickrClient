@@ -12,6 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+
         <ProgressBar IsIndeterminate="True"
                     Style="{StaticResource MaterialDesignCircularProgressBar}"
                     Grid.Column="0" />
@@ -19,11 +20,26 @@
                 Height="50"
                 Source="{Binding PhotosetSquareThumbnailUrl}"
                 Grid.Column="0" />
-        <TextBlock Text="{Binding Title, Mode=OneWay}"
-                    Grid.Column="1"
-                    Margin="10,0,0,0"
-                    FontSize="16"
-                    VerticalAlignment="Center"
-                    materialDesign:TextBlockAssist.AutoToolTip="True" />
+
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock Text="{Binding Title, Mode=OneWay}"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="10,0,0,0"
+                        FontSize="16"
+                        VerticalAlignment="Top"
+                        materialDesign:TextBlockAssist.AutoToolTip="True" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding NumberOfPhotos, Mode=OneWay}"                
+                            Margin="10,0,0,0"
+                            FontSize="12"
+                            VerticalAlignment="Top"
+                            materialDesign:TextBlockAssist.AutoToolTip="True" />
+                <TextBlock Text=" Bilder" />
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

@@ -2,6 +2,7 @@
 using FlickrClient.Upload.Data;
 using FlickrNet;
 using System;
+using System.Windows.Threading;
 
 namespace FlickrClient.Upload.Services
 {
@@ -20,7 +21,7 @@ namespace FlickrClient.Upload.Services
 
             flickr.OnUploadProgress += (s, e) =>
             {
-                progress(e.ProcessPercentage, e.UploadComplete);
+                Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Render, new Action(() => { progress(e.ProcessPercentage, e.UploadComplete); }));
             };
 
             string result = flickr.UploadPicture(

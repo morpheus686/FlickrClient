@@ -32,8 +32,10 @@
                Height="200"
                VerticalAlignment="Top"
                Source="{Binding Location, Mode=OneWay, Converter={StaticResource FileInfoToStringConverter}}" />
-        <ProgressBar Grid.Row="0"
+        <ProgressBar Grid.Row="4"
                      Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Height="20"
                      VerticalAlignment="Top"
                      Value="{Binding ProgressInPercent, Mode=OneWay}"
                      Visibility="{Binding IsUploading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"

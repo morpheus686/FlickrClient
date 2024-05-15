@@ -12,7 +12,7 @@ namespace FlickrClient.Services
     {
         private const string IndeterminateProgressDialogViewName = "IndeterminateProgressDialogView";
         private const string MessageDialogViewName = "MessageDialogView";
-
+        private const string DialogIdentifier = "DialogHost";
         private readonly Lazy<DialogHost> _dialogHost;
         private readonly IViewService _viewService;
 
@@ -27,13 +27,13 @@ namespace FlickrClient.Services
             var view = _viewService.GetView(dialogName);
             view.DataContext = viewModel;
 
-            return DialogHost.Show(view);
+            return DialogHost.Show(view, DialogIdentifier);
         }
 
         public Task<object> ShowDialog(string dialogName)
         {
             var view = _viewService.GetView(dialogName);
-            return DialogHost.Show(view);
+            return DialogHost.Show(view, DialogIdentifier);
         }
 
         public Task ShowIndeterminateDialog(Func<Task> progressTask)

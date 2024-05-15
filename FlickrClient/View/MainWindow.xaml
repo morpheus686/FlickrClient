@@ -12,7 +12,8 @@
         Background="{StaticResource MaterialDesignPaper}"
         FontFamily="{StaticResource MaterialDesignFont}"
         Width="1000"
-        Height="600">
+        Height="600"
+        WindowState="Maximized">
     <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
                                Identifier="DialogHost"
                                x:Name="DialogHost">

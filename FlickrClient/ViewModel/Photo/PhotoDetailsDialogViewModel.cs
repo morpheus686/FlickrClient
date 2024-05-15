@@ -1,6 +1,7 @@
 ﻿using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
 using FlickrNet;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -17,6 +18,9 @@ namespace FlickrClient.ViewModel
 
         public int? CountFaves { get => _photo.CountFaves; }
         public string Description { get => _photo.Description; }
+        public DateTime UploadDate { get => _photo.DateUploaded; }
+        public DateTime TakenDate { get => _photo.DateTaken; }
+
         public ObservableCollection<GroupFullInfo> GroupCollection { get; }
 
         public bool IsLoadingGroups

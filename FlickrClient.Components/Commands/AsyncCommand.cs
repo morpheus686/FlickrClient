@@ -1,5 +1,4 @@
-﻿using log4net.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,16 +20,13 @@ namespace FlickrClient.Components.Commands
         private bool _isExecuting;
         private readonly Func<Task> _execute;
         private readonly Func<bool> _canExecute;
-        private readonly IErrorHandler _errorHandler;
 
         public AsyncCommand(
             Func<Task> execute,
-            Func<bool> canExecute = null,
-            IErrorHandler errorHandler = null)
+            Func<bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
-            _errorHandler = errorHandler;
         }
 
         public bool CanExecute()

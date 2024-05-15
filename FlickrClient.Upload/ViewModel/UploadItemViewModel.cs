@@ -74,7 +74,7 @@ namespace FlickrClient.Upload.ViewModel
         public async Task UploadPictureAsync()
         {
             IsUploading = true;
-            string result =  await Task.Run(() => _uploadService.UploadPicture(UploadItem, ReportProgress));
+            string result = await Task.Run(() => _uploadService.UploadPicture(UploadItem, ReportProgress));
         }
     }
 }
