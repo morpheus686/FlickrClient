@@ -1,7 +1,6 @@
 ﻿using FlickrClient.Components.Commands;
 using FlickrClient.Components.ViewModel;
 using FlickrClient.DomainModel.Services;
-using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
