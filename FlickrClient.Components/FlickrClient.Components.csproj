@@ -57,6 +57,10 @@
     <Reference Include="Dragablz, Version=0.0.3.234, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.234\lib\net45\Dragablz.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=3.3.0.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
+      <HintPath>..\packages\log4net.3.3.0\lib\net462\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=3.0.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.3.0.0\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
